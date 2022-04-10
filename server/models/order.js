@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    shippingInfo: {
+    shippingDetails: {
         houseNo: {
             type: String,
             required: true,
@@ -48,6 +48,11 @@ const orderSchema = new mongoose.Schema({
     },
     orderItems: [
         {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Product",
+                required: true,
+            },
             name: {
                 type: String,
                 required: true,
@@ -55,6 +60,11 @@ const orderSchema = new mongoose.Schema({
             price: {
                 type: Number,
                 required: true,
+            },
+            discount: {
+                type: Number,
+                required: true,
+                default: 0,
             },
             quantity: {
                 type: Number,
@@ -64,14 +74,9 @@ const orderSchema = new mongoose.Schema({
                 type: String,
                 required: true,
             },
-            product: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",
-                required: true,
-            },
         },
     ],
-    paymentInfo: {
+    paymentDetails: {
         id: {
             type: String,
             required: true,
@@ -80,42 +85,50 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
+        mode: {
+            type: String,
+            required: true,
+        },
+        paidAt: {
+            type: Date,
+            required: true,
+        },
     },
-    paidAt: {
-        type: Date,
-        required: true,
+    priceDetails: {
+        sum: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        discount: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        tax: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        shipping: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        total: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
     },
-    itemsPrice: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    discount: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    taxPrice: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    shippingPrice: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    totalPrice: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    orderStatus: {
+    status: {
         type: String,
         required: true,
         default: "Processing",
     },
     deliveredAt: Date,
+    cancelledAt: Date,
+    returnedAt: Date,
     createdAt: {
         type: Date,
         default: Date.now,

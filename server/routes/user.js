@@ -14,11 +14,11 @@ router.route('/password/update').put(isAuthenticatedUser, changeUserPassword)
 router.route('/user/update').put(isAuthenticatedUser, updateUserProfile)
 router.route('/user/wishlist')
     .get(isAuthenticatedUser, getUserWishlist)
-    .put(isAuthenticatedUser, addToWishlist)
+    .post(isAuthenticatedUser, addToWishlist)
     .delete(isAuthenticatedUser, removeFromWishlist)
 router.route('/user/cart')
     .get(isAuthenticatedUser, getUserCart)
-    .put(isAuthenticatedUser, addToCart)
+    .post(isAuthenticatedUser, addToCart)
     .delete(isAuthenticatedUser, removeFromCart)
 
 router.route('/admin/users').get(isAuthenticatedUser, authorizeRoles("admin"), getAllUsers)
@@ -26,6 +26,5 @@ router.route('/admin/user/:id')
     .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetailsAdmin)
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
     .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser)
-
 
 module.exports = router

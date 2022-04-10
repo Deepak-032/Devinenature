@@ -113,7 +113,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     } catch (error) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
-
+        
         await user.save({ validateBeforeSave: false })
         return next(new ErrorHandler(error.message, 500))
     }
@@ -157,8 +157,11 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Wishlist
 exports.getUserWishlist = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.user.id, { _id: 0, wishlist: 1 }).populate("wishlist.product", "name price images")
-    
+    const user = await User.findById(req.user.id, { _id: 0, wishlist: 1 }).populate(
+        "wishlist.product",
+        "name price images"
+    )
+
     res.status(200).json({
         success: true,
         wishlist: user.wishlist,
@@ -167,7 +170,10 @@ exports.getUserWishlist = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Cart
 exports.getUserCart = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.user.id, { _id: 0, cart: 1 }).populate("cart.product", "name price images")
+    const user = await User.findById(req.user.id, { _id: 0, cart: 1 }).populate(
+        "cart.product",
+        "name price discount stock images"
+    )
 
     res.status(200).json({
         success: true,
@@ -177,22 +183,18 @@ exports.getUserCart = catchAsyncErrors(async (req, res, next) => {
 
 // Add Product to Wishlist
 exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
-    const item = {
-        product: req.body.product
-    }
-
     let user = await User.findById(req.user.id)
 
-    const isExist = user.wishlist.find(item => {
+    const exists = user.wishlist.find(item => {
         if (item.product.toString() === req.body.product.toString())
             return true
     })
 
-    if (!isExist) {
-        user.wishlist.push(item)
+    if (!exists) {
+        user.wishlist.push(req.body)    // product
     }
 
-    await user.save({ validateBeforeSave: false })
+    await user.save()
 
     res.status(200).json({
         success: true,
@@ -200,27 +202,24 @@ exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-// Add Product to Cart
+// Add Product to Cart or Update Product quantity
 exports.addToCart = catchAsyncErrors(async (req, res, next) => {
-    const item = {
-        product: req.body.product,
-        quantity: Number(req.body.quantity)
-    }
+    const quantity = Number(req.body.quantity)
 
     let user = await User.findById(req.user.id)
 
     const exists = user.cart.find(item => {
         if (item.product.toString() === req.body.product.toString()) {
-            item.quantity += Number(req.body.quantity) || 1
+            quantity ? item.quantity = quantity : item.quantity += 1
             return true
         }
     })
 
     if (!exists) {
-        user.cart.push(item)
+        user.cart.push(req.body)    // product size quantity
     }
 
-    await user.save({ validateBeforeSave: false })
+    await user.save()
 
     res.status(200).json({
         success: true,
@@ -238,6 +237,7 @@ exports.removeFromWishlist = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
+        message: "Product successfully removed",
         wishlist: user.wishlist,
     })
 })
@@ -245,13 +245,14 @@ exports.removeFromWishlist = catchAsyncErrors(async (req, res, next) => {
 // Remove Product from Cart
 exports.removeFromCart = catchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.user.id)
-    
+
     user.cart = user.cart.filter(item => item.product.toString() !== req.query.id.toString())
 
     await user.save({ validateBeforeSave: false })
 
     res.status(200).json({
         success: true,
+        message: "Product successfully removed",
         cart: user.cart,
     })
 })

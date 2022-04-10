@@ -26,6 +26,8 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: Number,
         required: [true, "Please enter your Phone Number"],
+        min: [999999999, "Phone no should be of 10 characters"],
+        max: [9999999999, "Phone no should be of 10 characters"]
     },
     role: {
         type: String,
@@ -51,10 +53,14 @@ const userSchema = new mongoose.Schema({
                 ref: "Product",
                 required: true,
             },
+            size: {
+                type: Number,
+                required: [true, "Please select the size"],
+            },
             quantity: {
                 type: Number,
-                required: true,
                 default: 1,
+                min: 1
             }
         }
     ],
