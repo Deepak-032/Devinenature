@@ -3,6 +3,7 @@ const validator = require("validator")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const crypto = require('crypto')
+const addressSchema = require('./schema/address')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -33,40 +34,36 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user",
     },
+    wishlist: [{
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product",
+            required: true,
+        }
+    }],
+    cart: [{
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product",
+            required: true,
+        },
+        size: {
+            type: Number,
+            required: [true, "Please select the size"],
+        },
+        quantity: {
+            type: Number,
+            default: 1,
+            min: 1
+        }
+    }],
+    address: [addressSchema],
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
     createdAt: {
         type: Date,
         default: Date.now,
     },
-    wishlist: [
-        {
-            product: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",
-                required: true,
-            }
-        }
-    ],
-    cart: [
-        {
-            product: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",
-                required: true,
-            },
-            size: {
-                type: Number,
-                required: [true, "Please select the size"],
-            },
-            quantity: {
-                type: Number,
-                default: 1,
-                min: 1
-            }
-        }
-    ],
-
-    resetPasswordToken: String,
-    resetPasswordExpire: Date,
 })
 
 userSchema.pre("save", async function (next) {

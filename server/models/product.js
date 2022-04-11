@@ -29,7 +29,7 @@ const productSchema = new mongoose.Schema({
         default: 1,
     },
     sizes: {
-        type:[Number],
+        type: [Number],
         validate: [v => Array.isArray(v) && v.length > 0, "Please enter product Sizes"]
     },
     images: {
@@ -61,35 +61,33 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    reviews: [
-        {
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
-                required: true,
-            },
-            name: {
-                type: String,
-                required: true,
-            },
-            rating: {
-                type: Number,
-                required: true,
-            },
-            comment: {
-                type: String,
-                required: true,
-                maxLength: 50,
-            },
-            description: {
-                type: String
-            },
-            createdAt: {
-                type: Date,
-                default: Date.now,
-            },
+    reviews: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
         },
-    ],
+        name: {
+            type: String,
+            required: true,
+        },
+        rating: {
+            type: Number,
+            required: true,
+        },
+        comment: {
+            type: String,
+            required: true,
+            maxLength: 50,
+        },
+        description: {
+            type: String
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+    }],
     user: { // User to check who created this product
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

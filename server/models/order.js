@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const addressSchema = require("./schema/address")
 
 const orderSchema = new mongoose.Schema({
     user: {
@@ -6,76 +7,34 @@ const orderSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    shippingDetails: {
-        houseNo: {
+    orderItems: [{
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product",
+            required: true,
+        },
+        name: {
             type: String,
             required: true,
         },
-        pincode: {
+        price: {
             type: Number,
             required: true,
         },
-        street: {
-            type: String,
+        discount: {
+            type: Number,
             required: true,
+            default: 0,
         },
-        landmark: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        state: {
-            type: String,
-            required: true,
-        },
-        country: {
-            type: String,
-            required: true,
-        },
-        phoneNo: {
+        quantity: {
             type: Number,
             required: true,
         },
-        defaultAddress: {
-            type: Boolean,
+        image: {
+            type: String,
             required: true,
-            default: false,
         },
-        deliveryInstructions: String,
-    },
-    orderItems: [
-        {
-            product: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",
-                required: true,
-            },
-            name: {
-                type: String,
-                required: true,
-            },
-            price: {
-                type: Number,
-                required: true,
-            },
-            discount: {
-                type: Number,
-                required: true,
-                default: 0,
-            },
-            quantity: {
-                type: Number,
-                required: true,
-            },
-            image: {
-                type: String,
-                required: true,
-            },
-        },
-    ],
+    }],
     paymentDetails: {
         id: {
             type: String,
@@ -126,6 +85,7 @@ const orderSchema = new mongoose.Schema({
         required: true,
         default: "Processing",
     },
+    shippingDetails: addressSchema,
     deliveredAt: Date,
     cancelledAt: Date,
     returnedAt: Date,
