@@ -17,22 +17,34 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        price: {
-            type: Number,
-            required: true,
-        },
-        discount: {
-            type: Number,
-            required: true,
-            default: 0,
+        image: {
+            public_id: {
+                type: String,
+                required: true,
+            },
+            url: {
+                type: String,
+                required: true,
+            },
         },
         quantity: {
             type: Number,
             required: true,
         },
-        image: {
-            type: String,
-            required: true,
+        priceSpec: {
+            size: {
+                type: Number,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true,
+            },
+            discount: {
+                type: Number,
+                required: true,
+                default: 0,
+            },
         },
     }],
     paymentDetails: {

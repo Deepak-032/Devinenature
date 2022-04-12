@@ -6,10 +6,6 @@ const productSchema = new mongoose.Schema({
         required: [true, "Please enter product Name"],
         trim: true,
     },
-    price: {
-        type: Number,
-        required: [true, "Please enter product Price"],
-    },
     description: {
         type: String,
         required: [true, "Please enter product Description"],
@@ -28,9 +24,18 @@ const productSchema = new mongoose.Schema({
         maxLength: [4, "Stock cannot exceed 4 characters"],
         default: 1,
     },
-    sizes: {
-        type: [Number],
-        validate: [v => Array.isArray(v) && v.length > 0, "Please enter product Sizes"]
+    priceSpecs: {
+        type: [{
+            size: {
+                type: Number,
+                required: [true, "Please enter product Size"],
+            },
+            price: {
+                type: Number,
+                required: [true, "Please enter product Price"],
+            },
+        }],
+        validate: [v => Array.isArray(v) && v.length > 0, "Please enter price specification"]
     },
     images: {
         type: [{

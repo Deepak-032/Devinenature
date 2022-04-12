@@ -6,6 +6,8 @@ const sendToken = require("../utils/jwtToken")
 const sendEmail = require("../utils/sendEmail")
 const crypto = require('crypto')
 const jwt = require("jsonwebtoken")
+const formatUserCart = require("../utils/user/formatUserCart")
+const formatUserWishlist = require("../utils/user/formatUserWishlist")
 
 // Register new User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -113,7 +115,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     } catch (error) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
-        
+
         await user.save({ validateBeforeSave: false })
         return next(new ErrorHandler(error.message, 500))
     }
@@ -157,10 +159,12 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Wishlist
 exports.getUserWishlist = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.user.id, { _id: 0, wishlist: 1 }).populate(
+    let user = await User.findById(req.user.id, { _id: 0, wishlist: 1 }).populate(
         "wishlist.product",
-        "name price images"
-    )
+        "name priceSpecs images"
+    ).lean()
+    
+    user.wishlist = formatUserWishlist(user.wishlist)
 
     res.status(200).json({
         success: true,
@@ -170,14 +174,16 @@ exports.getUserWishlist = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Cart
 exports.getUserCart = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.user.id, { _id: 0, cart: 1 }).populate(
+    let user = await User.findById(req.user.id, { _id: 0, cart: 1 }).populate(
         "cart.product",
-        "name price discount stock images"
-    )
+        "name priceSpecs stock images"
+    ).lean()
+
+    user.cart = formatUserCart(user.cart)
 
     res.status(200).json({
         success: true,
-        cart: user.cart,
+        cart: user.cart
     })
 })
 
@@ -205,11 +211,13 @@ exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
 // Add Product to Cart or Update Product quantity
 exports.addToCart = catchAsyncErrors(async (req, res, next) => {
     const quantity = Number(req.body.quantity)
+    const size = Number(req.body.size)
 
     let user = await User.findById(req.user.id)
 
     const exists = user.cart.find(item => {
         if (item.product.toString() === req.body.product.toString()) {
+            size && (item.size = size)
             quantity ? item.quantity = quantity : item.quantity += 1
             return true
         }

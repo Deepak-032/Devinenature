@@ -1,19 +1,31 @@
 const Order = require("../models/order")
 const Product = require("../models/product")
+const User = require("../models/user")
 const ErrorHander = require("../utils/errorHandler")
 const catchAsyncErrors = require("../middleware/catchAsyncErrors")
+const calcOrderPrice = require('../utils/calcOrderPrice')
+const formatUserCart = require("../utils/user/formatUserCart")
+
 
 // Create new Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
-    const { shippingDetails, orderItems, paymentDetails, priceDetails } = req.body
+    let { shippingDetails, paymentDetails } = req.body
+    paymentDetails.paidAt = Date.now()
+
+    let user = await User.findById(req.user.id, { cart: 1 }).populate(
+        "cart.product",
+        "name priceSpecs stock images"
+    ).lean()
+
+    user.cart = formatUserCart(user.cart)
+    const priceDetails = calcOrderPrice(user.cart)
 
     const order = await Order.create({
         user: req.user.id,
+        orderItems: user.cart,
+        paymentDetails,        
         shippingDetails,
-        orderItems,
-        paymentDetails,
-        priceDetails,
-        paidAt: Date.now()
+        priceDetails
     })
 
     res.status(201).json({
