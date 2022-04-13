@@ -6,12 +6,12 @@ const ApiFeatures = require('../utils/apiFeatures')
 // Get all products
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
     const resultPerPage = 5
-    const productsCount = await Product.countDocuments();
+    const productsCount = await Product.countDocuments()
     const apiFeatures = new ApiFeatures(Product.find({}, { name: 1, priceSpecs: 1, images: 1 }), req.query)
         .search()
         .filter()
         .pagination(resultPerPage)
-    const products = await apiFeatures.query
+    const products = await apiFeatures.query.lean()
 
     res.status(200).json({
         success: true,
@@ -53,13 +53,13 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Delete product -- Admin
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id)
 
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))
     }
 
-    await product.remove();
+    await product.remove()
 
     res.status(200).json({
         success: true,
@@ -69,7 +69,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Get product details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).lean()
 
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))

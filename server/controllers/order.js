@@ -23,7 +23,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.create({
         user: req.user.id,
         orderItems: user.cart,
-        paymentDetails,        
+        paymentDetails,
         shippingDetails,
         priceDetails
     })
@@ -36,7 +36,13 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Orders
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
-    const orders = await Order.find({ user: req.user.id }, { deliveredAt: 1, orderItems: 1, orderStatus: 1 })
+    const orders = await Order.find({ user: req.user.id }, {
+        deliveredAt: 1,
+        cancelledAt: 1,
+        returnedAt: 1,
+        orderItems: 1,
+        status: 1
+    }).lean()
 
     res.status(200).json({
         success: true,
@@ -46,7 +52,7 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 
 // Get Order Details
 exports.myOrder = catchAsyncErrors(async (req, res, next) => {
-    const order = await Order.findById(req.params.id, { user: 0 })
+    const order = await Order.findById(req.params.id, { user: 0 }).lean()
 
     res.status(200).json({
         success: true,
@@ -98,7 +104,13 @@ exports.myOrder = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Orders -- Admin
 exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
-    const orders = await Order.find({}, { user: 1, status: 1, priceDetails: { total: 1 }, createdAt: 1, deliveredAt: 1 }).populate("user", "name")
+    const orders = await Order.find({}, {
+        status: 1,
+        "priceDetails.total": 1,
+        createdAt: 1,
+        deliveredAt: 1,
+        cancelledAt: 1
+    }).populate("user", "name").lean()
 
     const totalSale = orders.reduce((amount, order) => amount + order.priceDetails.total, 0)
 
@@ -114,7 +126,7 @@ exports.getOrderDetails = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.findById(req.params.id).populate(
         "user",
         "name email phone"
-    )
+    ).lean()
 
     if (!order) {
         return next(new ErrorHander("Order not found", 404))
@@ -172,6 +184,7 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
+        message: "Order Successfully Deleted"
     })
 })
 

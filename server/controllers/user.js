@@ -13,7 +13,8 @@ const formatUserWishlist = require("../utils/user/formatUserWishlist")
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password, phone } = req.body
 
-    const user = await User.findOne({ email })
+    // checking if user already exists
+    const user = await User.findOne({ email }).lean()
 
     if (user) {
         return next(new ErrorHandler("Entered email already exists", 400))
@@ -22,9 +23,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     const token = jwt.sign({ name, email, password, phone }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE_EMAIL_VERIFICATION
     })
-
     const emailVerificationUrl = `${req.protocol}://${req.get('host')}/api/dk1/register/verify/${token}`
-
     const message = `Click on the link given below to verify your email address:\n\n${emailVerificationUrl}\n\nIf you have not requested this email then, please ignore it.`
 
     await sendEmail({
@@ -56,7 +55,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Please enter Email & Password", 400))
     }
 
-    const user = await User.findOne({ email }).select("+password")
+    const user = await User.findOne({ email }, { name: 1, password: 1 })
 
     if (!user) {
         return next(new ErrorHandler("Email or Password is incorrect"))
@@ -149,7 +148,13 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Details
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.user.id, { wishlist: 0, cart: 0, resetPasswordToken: 0, resetPasswordExpire: 0 })
+    const user = await User.findById(req.user.id, {
+        role: 0,
+        wishlist: 0,
+        cart: 0,
+        resetPasswordToken: 0,
+        resetPasswordExpire: 0,
+    }).lean()
 
     res.status(200).json({
         success: true,
@@ -163,7 +168,7 @@ exports.getUserWishlist = catchAsyncErrors(async (req, res, next) => {
         "wishlist.product",
         "name priceSpecs images"
     ).lean()
-    
+
     user.wishlist = formatUserWishlist(user.wishlist)
 
     res.status(200).json({
@@ -191,10 +196,7 @@ exports.getUserCart = catchAsyncErrors(async (req, res, next) => {
 exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.user.id)
 
-    const exists = user.wishlist.find(item => {
-        if (item.product.toString() === req.body.product.toString())
-            return true
-    })
+    const exists = user.wishlist.find(item => item.product.toString() === req.body.product.toString())
 
     if (!exists) {
         user.wishlist.push(req.body)    // product
@@ -269,7 +271,7 @@ exports.removeFromCart = catchAsyncErrors(async (req, res, next) => {
 exports.changeUserPassword = catchAsyncErrors(async (req, res, next) => {
     const { oldPassword, newPassword, confirmPassword } = req.body
 
-    const user = await User.findById(req.user.id).select("+password")
+    const user = await User.findById(req.user.id, { name: 1, password: 1 })
 
     const isPasswordMatched = await user.comparePassword(oldPassword)
 
@@ -312,7 +314,7 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Users -- Admin
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
-    const users = await User.find({}, { name: 1, email: 1, role: 1, createdAt: 1 })
+    const users = await User.find({}, { name: 1, email: 1, role: 1, createdAt: 1 }).lean()
 
     res.status(200).json({
         success: true,
@@ -323,7 +325,13 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Details -- Admin
 exports.getUserDetailsAdmin = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.params.id, { wishlist: 0, cart: 0, resetPasswordToken: 0, resetPasswordExpire: 0 })
+    const user = await User.findById(req.params.id, { 
+        wishlist: 0, 
+        cart: 0, 
+        resetPasswordToken: 0, 
+        resetPasswordExpire: 0,
+        address: 0
+    }).lean()
 
     if (!user) {
         return next(new ErrorHandler("User not found", 404))

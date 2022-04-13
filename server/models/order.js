@@ -105,6 +105,15 @@ const orderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-})
+    
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+}
+)
+ 
+// orderSchema.virtual('totalPrice').get(function () { return this.priceDetails.total })
 
 module.exports = mongoose.model("Order", orderSchema)
+ 

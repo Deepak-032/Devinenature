@@ -11,11 +11,13 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please enter your Name"],
         maxLength: [30, "Name cannot exceed 30 characters"],
         minLength: [4, "Name should have more than 4 characters"],
+        trim: true,
     },
     email: {
         type: String,
         required: [true, "Please enter your Email"],
         unique: true,
+        trim: true,
         validate: [validator.isEmail, "Please enter a valid Email"],
     },
     password: {
@@ -23,6 +25,7 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please enter your Password"],
         minLength: [8, "Password should be greater than 8 characters"],
         select: false,
+        trim: true,
     },
     phone: {
         type: Number,
@@ -32,6 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
+        enum: ["user", "admin"],
         default: "user",
     },
     wishlist: [{
