@@ -5,10 +5,7 @@ const formatUserWishlist = (wishlist) => {
         return {
             product: p._id,
             name: p.name,
-            image: {
-                public_id: p.images[0].public_id,
-                url: p.images[0].url
-            },
+            image: p.images[0],
             priceSpecs: p.priceSpecs
         }
     })

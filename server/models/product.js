@@ -34,25 +34,16 @@ const productSchema = new mongoose.Schema({
                 type: Number,
                 required: [true, "Please enter product Price"],
             },
+            discount: {
+                type: Number,
+                default: 0,
+            },
         }],
         validate: [v => Array.isArray(v) && v.length > 0, "Please enter price specification"]
     },
     images: {
-        type: [{
-            public_id: {
-                type: String,
-                required: true,
-            },
-            url: {
-                type: String,
-                required: true,
-            },
-        }],
+        type: [String],
         validate: [v => Array.isArray(v) && v.length > 0, "Please add atleast one image"]
-    },
-    discount: {
-        type: Number,
-        default: 0,
     },
     category: {
         type: String,

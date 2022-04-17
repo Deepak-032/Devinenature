@@ -15,18 +15,20 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.user.id, { cart: 1 }).populate(
         "cart.product",
         "name priceSpecs stock images"
-    ).lean()
+    )
 
-    user.cart = formatUserCart(user.cart)
-    const priceDetails = calcOrderPrice(user.cart)
-
+    const cart = formatUserCart(user.cart)
+    const priceDetails = calcOrderPrice(cart)
     const order = await Order.create({
         user: req.user.id,
-        orderItems: user.cart,
+        orderItems: cart,
         paymentDetails,
         shippingDetails,
         priceDetails
     })
+
+    user.cart = []
+    await user.save()
 
     res.status(201).json({
         success: true,
@@ -165,8 +167,8 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     if (order.status === "Delivered") {
         order.deliveredAt = Date.now()
     }
-
     await order.save({ validateBeforeSave: false })
+
     res.status(200).json({
         success: true,
     })
@@ -179,7 +181,6 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
     if (!order) {
         return next(new ErrorHander("Order not found", 404))
     }
-
     await order.remove()
 
     res.status(200).json({
@@ -191,6 +192,5 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
 async function updateStock(id, quantity) {
     const product = await Product.findById(id)
     product.stock -= quantity
-
     await product.save({ validateBeforeSave: false })
 }

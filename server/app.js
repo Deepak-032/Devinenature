@@ -1,8 +1,10 @@
 const express = require("express")
 const errorMiddleware = require("./middleware/error")
-const app = express()
 const cookieParser = require('cookie-parser')
+const fileUpload = require('express-fileupload')
+const app = express()
 
+app.use(fileUpload())
 app.use(express.json())
 app.use(cookieParser())
 

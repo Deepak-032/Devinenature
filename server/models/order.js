@@ -18,14 +18,8 @@ const orderSchema = new mongoose.Schema({
             required: true,
         },
         image: {
-            public_id: {
-                type: String,
-                required: true,
-            },
-            url: {
-                type: String,
-                required: true,
-            },
+            type: String,
+            required: true,
         },
         quantity: {
             type: Number,
@@ -105,15 +99,14 @@ const orderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    
+
 },
-{
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-}
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
+    }
 )
- 
+
 // orderSchema.virtual('totalPrice').get(function () { return this.priceDetails.total })
 
 module.exports = mongoose.model("Order", orderSchema)
- 

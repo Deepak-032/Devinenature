@@ -1,4 +1,4 @@
-const { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, changeUserPassword, updateUserProfile, getAllUsers, getUserDetailsAdmin, updateUserRole, deleteUser, registerVerifiedUser, getUserWishlist, getUserCart, addToCart, addToWishlist, removeFromWishlist, removeFromCart } = require('../controllers/user')
+const { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, changeUserPassword, updateUserProfile, getAllUsers, getUserDetailsAdmin, updateUserRole, deleteUser, registerVerifiedUser, getUserWishlist, getUserCart, addToCart, addToWishlist, removeFromWishlist, removeFromCart, getAllAddresses, addNewAddress, updateUserAddress, deleteUserAddress } = require('../controllers/user')
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth')
 
 const router = require('express').Router()
@@ -20,6 +20,11 @@ router.route('/user/cart')
     .get(isAuthenticatedUser, getUserCart)
     .post(isAuthenticatedUser, addToCart)
     .delete(isAuthenticatedUser, removeFromCart)
+router.route('/user/addresses')
+    .get(isAuthenticatedUser, getAllAddresses)
+    .post(isAuthenticatedUser, addNewAddress)
+    .put(isAuthenticatedUser, updateUserAddress)
+    .delete(isAuthenticatedUser, deleteUserAddress)
 
 router.route('/admin/users').get(isAuthenticatedUser, authorizeRoles("admin"), getAllUsers)
 router.route('/admin/user/:id')

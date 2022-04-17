@@ -2,6 +2,7 @@ const catchAsyncErrors = require('../middleware/catchAsyncErrors')
 const Product = require('../models/product')
 const ErrorHandler = require('../utils/errorHandler')
 const ApiFeatures = require('../utils/apiFeatures')
+const uploadFile = require('../utils/uploadFile')
 
 // Get all products
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
@@ -23,8 +24,13 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
 
 // Create new product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-    req.body.user = req.user.id
+    if (req.files == null) {
+        return next(new ErrorHandler("Please choose images to upload", 400))
+    }
 
+    const images = await uploadFile(req.files.images)
+    req.body.user = req.user.id
+    req.body.images = images
     const product = await Product.create(req.body)
 
     res.status(201).json({
@@ -58,7 +64,6 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))
     }
-
     await product.remove()
 
     res.status(200).json({
@@ -94,7 +99,6 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     }
 
     const product = await Product.findById(productId)
-
     const isReviewed = product.reviews.find(rev => {
         if (rev.user.toString() === req.user.id.toString()) {
             rev.rating = Number(rating)
@@ -110,7 +114,6 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     }
 
     product.ratings = product.reviews.reduce((ratings, rev) => ratings + rev.rating, 0) / product.reviews.length
-
     await product.save({ validateBeforeSave: false })
 
     res.status(200).json({
@@ -124,7 +127,7 @@ exports.getAllReviews = catchAsyncErrors(async (req, res, next) => {
 
 })
 
-// Delete Review
+// Delete Review -- Admin
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     let product = await Product.findById(req.params.id)
 
@@ -135,7 +138,6 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     product.reviews = product.reviews.filter(rev => rev._id.toString() !== req.query.id.toString())
     product.ratings = product.reviews.reduce((ratings, rev) => ratings + rev.rating, 0) / product.reviews.length
     product.numOfReviews = product.reviews.length
-
     await product.save({ validateBeforeSave: false })
 
     res.status(200).json({

@@ -10,6 +10,7 @@ const calcOrderPrice = (cart, tax = 0, shipping = 0) => {
         priceDetails.sum += (p.priceSpec.price * p.quantity)
         priceDetails.discount += (p.priceSpec.discount * p.quantity)
     })
+    
     priceDetails.total = priceDetails.sum - priceDetails.discount + priceDetails.tax + priceDetails.shipping
     return priceDetails
 }
