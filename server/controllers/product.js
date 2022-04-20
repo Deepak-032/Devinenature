@@ -2,7 +2,7 @@ const catchAsyncErrors = require('../middleware/catchAsyncErrors')
 const Product = require('../models/product')
 const ErrorHandler = require('../utils/errorHandler')
 const ApiFeatures = require('../utils/apiFeatures')
-const uploadFile = require('../utils/uploadFile')
+const deleteFiles = require('../utils/deleteFiles')
 
 // Get all products
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
@@ -24,19 +24,19 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
 
 // Create new product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-    if (req.files == null) {
-        return next(new ErrorHandler("Please choose images to upload", 400))
-    }
-
-    const images = await uploadFile(req.files.images)
     req.body.user = req.user.id
-    req.body.images = images
-    const product = await Product.create(req.body)
-
-    res.status(201).json({
-        success: true,
-        product
-    })
+        
+    try {
+        const product = await Product.create(req.body)
+        
+        res.status(201).json({
+            success: true,
+            product
+        })
+    } catch (error) {
+        deleteFiles(req.body.images)
+        return next(new ErrorHandler(error.message, 400))
+    }  
 })
 
 // Update product -- Admin
@@ -64,6 +64,8 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))
     }
+    
+    deleteFiles(product.images)
     await product.remove()
 
     res.status(200).json({

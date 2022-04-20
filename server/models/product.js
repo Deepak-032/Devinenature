@@ -18,12 +18,6 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter product Instructions"],
     },
-    stock: {
-        type: Number,
-        required: [true, "Please enter product Stock"],
-        maxLength: [4, "Stock cannot exceed 4 characters"],
-        default: 1,
-    },
     priceSpecs: {
         type: [{
             size: {
@@ -38,12 +32,18 @@ const productSchema = new mongoose.Schema({
                 type: Number,
                 default: 0,
             },
+            stock: {
+                type: Number,
+                required: [true, "Please enter product Stock"],
+                maxLength: [4, "Stock cannot exceed 4 characters"],
+                default: 1,
+            },
         }],
         validate: [v => Array.isArray(v) && v.length > 0, "Please enter price specification"]
     },
     images: {
         type: [String],
-        validate: [v => Array.isArray(v) && v.length > 0, "Please add atleast one image"]
+        validate: [v => Array.isArray(v) && v.length > 0, "Please choose atleast one image"]
     },
     category: {
         type: String,

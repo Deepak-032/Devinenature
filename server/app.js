@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const app = express()
 
-app.use(fileUpload())
+app.use(fileUpload({ createParentPath: true }))
 app.use(express.json())
 app.use(cookieParser())
 

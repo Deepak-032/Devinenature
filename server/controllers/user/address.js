@@ -1,6 +1,5 @@
 const catchAsyncErrors = require("../../middleware/catchAsyncErrors")
 const User = require('../../models/user')
-const ErrorHandler = require('../../utils/errorHandler')
 
 // Get All Addresses
 exports.getAllAddresses = catchAsyncErrors(async (req, res, next) => {
@@ -45,7 +44,7 @@ exports.updateUserAddress = catchAsyncErrors(async (req, res, next) => {
     })
     await user.save()
 
-    res.status(201).json({
+    res.status(200).json({
         success: true,
         addresses: user.addresses
     })
@@ -58,7 +57,7 @@ exports.deleteUserAddress = catchAsyncErrors(async (req, res, next) => {
     user.addresses = user.addresses.filter(address => address._id.toString() !== req.query.address.toString())
     await user.save()
 
-    res.status(201).json({
+    res.status(200).json({
         success: true,
         message: "Address Deleted Successfully",
         addresses: user.addresses
