@@ -111,7 +111,6 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
         await user.save({ validateBeforeSave: false })
         return next(new ErrorHandler(error.message, 500))
     }
-
 })
 
 // Reset Password

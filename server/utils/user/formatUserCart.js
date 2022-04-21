@@ -6,7 +6,6 @@ const formatUserCart = (cart) => {
         return {
             product: p._id,
             name: p.name,
-            stock: p.stock,
             image: p.images[0],
             quantity: product.quantity,
             priceSpec

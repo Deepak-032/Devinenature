@@ -6,7 +6,6 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors")
 const calcOrderPrice = require('../utils/calcOrderPrice')
 const formatUserCart = require("../utils/user/formatUserCart")
 
-
 // Create new Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     let { shippingDetails, paymentDetails } = req.body
@@ -14,7 +13,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
 
     let user = await User.findById(req.user.id, { cart: 1 }).populate(
         "cart.product",
-        "name priceSpecs stock images"
+        "name priceSpecs images"
     )
 
     const cart = formatUserCart(user.cart)
@@ -160,7 +159,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
 
     if (order.status === "Shipped") {
         order.orderItems.forEach(async order => {
-            await updateStock(order.product, order.quantity)
+            await updateStock(order.product, order.quantity, order.priceSpec.size)
         })
     }
 
@@ -189,8 +188,13 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-async function updateStock(id, quantity) {
+async function updateStock(id, quantity, size) {
     const product = await Product.findById(id)
-    product.stock -= quantity
+    product.priceSpecs.find(priceSpec => {
+        if (priceSpec.size === size) {
+            priceSpec.stock -= quantity
+            return true
+        }
+    })
     await product.save({ validateBeforeSave: false })
 }

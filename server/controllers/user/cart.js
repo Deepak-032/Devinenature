@@ -6,7 +6,7 @@ const formatUserCart = require("../../utils/user/formatUserCart")
 exports.getUserCart = catchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.user.id, { _id: 0, cart: 1 }).populate(
         "cart.product",
-        "name priceSpecs stock images"
+        "name priceSpecs images"
     ).lean()
 
     user.cart = formatUserCart(user.cart)
