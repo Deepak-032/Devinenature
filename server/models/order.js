@@ -30,13 +30,12 @@ const orderSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
-            price: {
+            mrp: {
                 type: Number,
                 required: true,
             },
-            discount: {
+            offerPrice: {
                 type: Number,
-                required: true,
                 default: 0,
             },
         },
@@ -65,7 +64,7 @@ const orderSchema = new mongoose.Schema({
             required: true,
             default: 0,
         },
-        discount: {
+        offerPrice: {
             type: Number,
             required: true,
             default: 0,

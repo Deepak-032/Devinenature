@@ -8,7 +8,14 @@ const deleteFiles = require('../utils/deleteFiles')
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
     const resultPerPage = 5
     const productsCount = await Product.countDocuments()
-    const apiFeatures = new ApiFeatures(Product.find({}, { name: 1, priceSpecs: 1, images: 1 }), req.query)
+    const apiFeatures = new ApiFeatures(Product.find({}, {
+        name: 1,
+        priceSpec: { $first: '$priceSpecs' },
+        image: { $first: '$images' },
+        ratings: 1,
+        category: 1,
+        description: 1
+    }), req.query)
         .search()
         .filter()
         .pagination(resultPerPage)
@@ -25,10 +32,10 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
 // Create new product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     req.body.user = req.user.id
-        
+
     try {
         const product = await Product.create(req.body)
-        
+
         res.status(201).json({
             success: true,
             product
@@ -36,7 +43,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     } catch (error) {
         deleteFiles(req.body.images)
         return next(new ErrorHandler(error.message, 400))
-    }  
+    }
 })
 
 // Update product -- Admin
@@ -64,7 +71,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))
     }
-    
+
     deleteFiles(product.images)
     await product.remove()
 
