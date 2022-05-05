@@ -1,0 +1,149 @@
+.product_card {
+    /* width: 20vmax; */
+    max-width: 100%;
+    width: 100%;
+    display: inline-block;
+    padding-top: 1.5rem;
+}
+
+.product_card_img {
+    background-repeat: no-repeat;
+    height: 23vmax;
+    width: 100%;
+    background-size: cover;
+}
+
+.product_card_data {
+    width: 100%;
+    background-color: #F8F2EB;
+    padding: 9px 15px 20px 15px;
+}
+
+.product_card_data h5 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #000;
+}
+
+.offer_price::before {
+    content: '₹';
+    font-size: 12px;
+    color: #DB4242;
+    position: relative;
+    top: -8px;
+    font-family: system-ui, serif;
+}
+
+.offer_price {
+    color: #DB4242;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.mrp {
+    font-size: 16px;
+    font-weight: 500;
+    color: #9F9F9F;
+}
+
+.discount {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9F752A;
+}
+
+.product_card_price_spec>* {
+    margin-right: 7px;
+}
+
+.add_to_wishlist {
+    width: 28px;
+    height: 28px;
+    background-color: #fff;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add_to_wishlist>svg {
+    position: relative;
+    top: .8px;
+    color: #DB4242;
+    font-size: 20px;
+}
+
+.ratings {
+    background-color: #fff;
+    padding: 2px 7px 2px 9px;
+    border-radius: 20px;
+    color: #9F752A;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    position: relative;
+    left: 74%;
+    top: 5%;
+}
+
+/* .product_card:hover {
+    transform: scale(1.02);
+    transition: .5s;
+} */
+
+@media (max-width: 991px) {
+    .product_card_data {
+        padding: 0 10px 10px 10px;
+    }
+
+    .category {
+        font-size: 8px;
+    }
+
+    .product_card_data h5 {
+        margin-bottom: 6px;
+        font-size: 14px;
+    }
+
+    .offer_price::before {
+        font-size: 10px;
+        top: -3px;
+    }
+
+    .offer_price {
+        font-size: 14px;
+    }
+
+    .mrp,
+    .discount {
+        font-size: 12px;
+    }
+
+    .product_card_price_spec>* {
+        margin-right: 4px;
+    }
+
+    .add_to_wishlist {
+        width: 20px;
+        height: 20px;
+    }
+
+    .add_to_wishlist>svg {
+        top: .8px;
+        font-size: 16px;
+    }
+
+    .ratings {
+        padding: 2px 5px;
+        font-size: 8px;
+        font-weight: 600;
+        left: 75%;
+        top: 2%;
+    }
+
+    .product_card:hover {
+        transform: none;
+    }
+}

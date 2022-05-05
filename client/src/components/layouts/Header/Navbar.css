@@ -1,0 +1,208 @@
+.nav_top {
+    position: sticky;
+    background-color: #FFFF;
+    top: 0;
+    z-index: 3;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.logo {
+    height: 40px;
+    object-fit: contain;
+}
+
+.search_icon {
+    margin-right: -18px;
+    transition: .5s;
+}
+
+.search_input {
+    border: none;
+    border-bottom: 2px solid #896229 !important;
+    font-size: 14px;
+    background-color: transparent;
+    width: 0;
+    padding: 0;
+    transition: .5s;
+    cursor: auto !important;
+}
+
+.search_input.active {
+    width: 40vw;
+    padding-left: 25px;
+    transition: .5s;
+}
+
+.search_input:focus {
+    outline: none;
+}
+
+.nav_top_right * {
+    color: #896229;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition: .5s;
+}
+
+.nav_top_right>*:not(:last-child) {
+    margin-right: 25px;
+}
+
+.nav_bottom_container {
+    background-color: #F8F2EB;
+}
+
+.nav_bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.nav_bottom a {
+    list-style-type: none;
+    padding: 0.75rem 0;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #896229;
+    font-size: 14px;
+}
+
+.nav_bottom a span {
+    padding: 0 28px;
+}
+
+.nav_bottom a:not(:first-child) span {
+    border-left: 2px solid #9E9E9E;
+}
+
+.hamburgerMenu {
+    position: absolute;
+    right: 1.5rem;
+    top: 0.75rem;
+    color: #896229;
+    font-size: 32px;
+}
+
+.search_suggestions {
+    background-color: #FFFF;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    box-shadow: 0 8px 20px 0px rgb(0 0 0 / 10%);
+}
+
+.search_suggestions>a {
+    padding: 5px 15px;
+    font-size: 14px;
+    color: #9E9E9E;
+    text-decoration: none;
+    display: block;
+    transition: none;
+}
+
+.search_suggestions>a:hover {
+    background-color: rgb(0 0 0 / 10%);
+    color: #000000;
+}
+
+.contact_form_pop_up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 0.4);
+    z-index: 3;
+}
+
+
+@media (max-width: 991px) {
+    .nav_top {
+        position: static;
+        padding-bottom: 0;
+    }
+
+    .logo {
+        height: 46px;
+    }
+
+    .nav_top .container {
+        flex-direction: column;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .hamburgerMenu {
+        display: block !important;
+    }
+
+    .nav_top_right {
+        background-color: #F8F2EB;
+        width: 100%;
+        padding: 17px 0;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .nav_top_right>*:not(:last-child) {
+        margin: 0 12px;
+        font-size: 20px;
+    }
+
+    .nav_bottom {
+        /* align-items: flex-start; */
+        justify-content: flex-start;
+        padding-left: 0 !important;
+        flex-direction: column;
+        position: fixed;
+        top: 75px;
+        width: 100%;
+        height: 100%;
+        right: -100%;
+        z-index: 3;
+        background-color: #FFFF;
+        transition: all 1s cubic-bezier(0.64, -0.1, 0.63, 1.06);
+    }
+
+    .nav_bottom.active {
+        right: 0;
+        background-color: #FFFF;
+        padding-top: 30px;
+        overflow-x: hidden;
+    }
+
+    .nav_bottom a:not(:first-child) span {
+        border-left: none;
+    }
+
+    .nav_style_changer_mobile {
+        position: sticky !important;
+        top: 0;
+    }
+
+    .search_input.active {
+        width: 80vw;
+        padding-left: 25px;
+        transition: .5s;
+    }
+
+    .hide_icon_mobile {
+        font-size: 0px !important;
+        margin: 0 !important;
+        transition: .5s;
+    }
+
+    .contact_form_pop_up img {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .nav_bottom a span {
+        padding: 0 18px;
+    }
+}

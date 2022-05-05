@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6.933" height="6.108" viewBox="0 0 6.933 6.108">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #9f752a;
+      }
+    </style>
+  </defs>
+  <g id="Component_2_1" data-name="Component 2 – 1" transform="translate(0.34 0.4)">
+    <line id="Line_132" data-name="Line 132" class="cls-1" x2="5" y2="6" transform="translate(5.992) rotate(87)"/>
+    <line id="Line_133" data-name="Line 133" class="cls-1" x1="5" y2="6" transform="translate(6.212 0.26) rotate(92)"/>
+  </g>
+</svg>

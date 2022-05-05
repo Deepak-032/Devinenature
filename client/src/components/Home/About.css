@@ -1,0 +1,31 @@
+.about_portion {
+    background-color: #F8F2EB;
+}
+
+.about_row {
+    margin: 0 93px;
+}
+
+.about_row>p {
+    font-size: 20px;
+}
+
+.about_image_container {
+    margin-top: 50px;
+}
+
+.about_image_container>img {
+    padding-bottom: 36px;
+    width: 90px;
+}
+
+@media (max-width: 991px) {
+    .about_row {
+        margin: auto;
+    }
+
+    .about_image_container>img {
+        padding-bottom: 23px;
+        width: 48px;
+    }
+}

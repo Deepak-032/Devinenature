@@ -1,0 +1,44 @@
+.reviews_arrow {
+    font-size: 26px;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    color: #9A712C;
+    transition: .5s;
+}
+
+.reviews_arrow_visible {
+    transform: scaleY(1.3) scaleX(1.6);
+    transition: .5s;
+}
+
+.review {
+    background-color: #F8F2EB;
+    width: 26.6vw;
+    padding: 28px 37px;
+    margin-right: 21px;
+    max-width: 418px;
+    min-width: 300px;
+}
+
+.review>i {
+    font-size: 70px;
+}
+
+.review>p {
+    font-size: 14px;
+    max-width: 320px;
+    margin: auto;
+}
+
+@media (max-width: 991px) {
+    .review {
+        width: 88vw;
+        margin-right: 21px;
+        max-width: 100%;
+    }
+    .review>p {
+        font-size: 16px;
+        max-width: 480px;
+    }
+}

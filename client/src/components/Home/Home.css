@@ -1,0 +1,38 @@
+.contact_form {
+    padding: 60px 55px 50px 55px;
+    background-color: #F8F2EB;
+}
+
+.contact_form_pop_up .contact_us_container {
+    margin-top: 54px;
+    transform: scale(0.9);
+}
+
+.contact_us_container {
+    background-color: #F8F2EB;
+}
+
+@media (max-width: 991px) {
+
+    .contact_form>h1,
+    .contact_form>.btn_submit {
+        text-align: center;
+        margin: auto;
+    }
+
+    .contact_form {
+        padding: 50px 0;
+        max-width: 560px;
+        margin: auto;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .input>*:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+
+    .contact_form {
+        padding: 50px 2rem;
+    }
+}
