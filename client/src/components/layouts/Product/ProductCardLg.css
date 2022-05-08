@@ -8,6 +8,7 @@
 .product_card_img_lg {
     background-repeat: no-repeat;
     height: 51vmax;
+    max-height: 858px;
     width: 100%;
     background-size: cover;
 }

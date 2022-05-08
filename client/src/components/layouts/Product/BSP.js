@@ -22,8 +22,8 @@ function BSP({ products, pageLink }) {
                 </div>
                 <div className='col-12 col-lg-6'>
                     <div className='row justify-content-center'>
-                        {(window.innerWidth <= 991 ? products : products.slice(1, 5)).map(product => (
-                            <div className='col-6 col-md-3 col-lg-6'>
+                        {(window.innerWidth <= 991 ? products.slice(0, 6) : products.slice(1, 5)).map(product => (
+                            <div className='col-6 col-md-4 col-lg-6'>
                                 <ProductCardS
                                     name={product.name}
                                     img={product.img}
@@ -37,7 +37,10 @@ function BSP({ products, pageLink }) {
                     </div>
                 </div>
             </div>
-            <Link to={pageLink} className='btn_bg_transparent d-block ms-auto me-auto mt-5'>VIEW ALL PRODUCTS {'>'}</Link>
+            {
+                pageLink &&
+                <Link to={pageLink} className='btn_bg_transparent d-block ms-auto me-auto mt-5'>VIEW ALL PRODUCTS {'>'}</Link>
+            }
         </div>
     )
 }

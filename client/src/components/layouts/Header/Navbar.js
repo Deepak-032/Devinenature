@@ -121,7 +121,7 @@ function Navbar() {
                         </form>
                         <FiShoppingBag className={showSearchInput ? 'hide_icon_mobile' : ''} />
                         <FaRegUser className={showSearchInput ? 'hide_icon_mobile' : ''} />
-                        <Link to={''} className='font14 dec_none d-none d-lg-block'>ABOUT</Link>
+                        <Link to={'/products'} className='font14 dec_none d-none d-lg-block'>ABOUT</Link>
                         <button onClick={toogleContactForm} className='font14 dec_none d-none d-lg-block'>CONTACT</button>
                     </div>
                     <span onClick={toogleNav} className='hamburgerMenu d-none' >{!click ? <GiHamburgerMenu /> : <IoCloseSharp />}</span>
@@ -129,7 +129,7 @@ function Navbar() {
             </nav>
             <div className='nav_bottom_container'>
                 <div className={`container nav_bottom ${click ? 'active' : ''}`}>
-                    <Link to={'/h'} onClick={toogleNav}><span>Skincare</span></Link>
+                    <Link to={'/products'} onClick={toogleNav}><span>Skincare</span></Link>
                     <Link to={''} onClick={toogleNav}><span>Haircare</span></Link>
                     <Link to={''} onClick={toogleNav}><span>bath & body</span></Link>
                     <Link to={''} onClick={toogleNav}><span>mens</span></Link>
