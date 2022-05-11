@@ -46,6 +46,7 @@
     font-size: 16px;
     font-weight: 500;
     color: #9F9F9F;
+    font-family: system-ui, serif;
 }
 
 .discount {
@@ -88,6 +89,7 @@
     position: relative;
     left: 74%;
     top: 5%;
+    font-size: 14px;
 }
 
 /* .product_card:hover {
@@ -96,6 +98,10 @@
 } */
 
 @media (max-width: 991px) {
+    .product_card {
+        padding-top: 0.75rem;
+    }
+
     .product_card_data {
         padding: 0 10px 10px 10px;
     }

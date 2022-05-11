@@ -1,6 +1,6 @@
 .reviews_arrow {
     font-size: 26px;
-    background-color: transparent;
+    background-color: transparent !important;
     border: none;
     padding: 10px;
     color: #9A712C;

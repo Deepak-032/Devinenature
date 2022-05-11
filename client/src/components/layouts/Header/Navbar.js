@@ -23,6 +23,7 @@ function Navbar() {
     const [searchResults, setSearchResults] = useState([])
 
     const toogleNav = () => setClick(!click)
+    const closeNav = () => setClick(false)
     const toogleContactForm = () => setShowContactForm(true)
 
     const showSearch = () => {
@@ -102,7 +103,7 @@ function Navbar() {
         <>
             <nav ref={navbarRef} className='nav_top'>
                 <div className='container d-flex align-items-center justify-content-between'>
-                    <img className='logo' src='/assets/logo.png' alt='Devinenature' />
+                    <Link to={'/'}><img className='logo' src='/assets/logo.png' alt='Devinenature' /></Link>
                     <div className='nav_top_right d-flex align-items-center'>
                         <form onSubmit={searchHandler} className='search position-relative' ref={searchRef}>
                             <GoSearch onClick={showSearch} className={showSearchInput ? 'search_icon' : ''} />
@@ -121,7 +122,7 @@ function Navbar() {
                         </form>
                         <FiShoppingBag className={showSearchInput ? 'hide_icon_mobile' : ''} />
                         <FaRegUser className={showSearchInput ? 'hide_icon_mobile' : ''} />
-                        <Link to={'/products'} className='font14 dec_none d-none d-lg-block'>ABOUT</Link>
+                        <Link to={'/product'} className='font14 dec_none d-none d-lg-block'>ABOUT</Link>
                         <button onClick={toogleContactForm} className='font14 dec_none d-none d-lg-block'>CONTACT</button>
                     </div>
                     <span onClick={toogleNav} className='hamburgerMenu d-none' >{!click ? <GiHamburgerMenu /> : <IoCloseSharp />}</span>
@@ -129,16 +130,16 @@ function Navbar() {
             </nav>
             <div className='nav_bottom_container'>
                 <div className={`container nav_bottom ${click ? 'active' : ''}`}>
-                    <Link to={'/products'} onClick={toogleNav}><span>Skincare</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>Haircare</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>bath & body</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>mens</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>gifting</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>wellness</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>best sellers</span></Link>
-                    <Link to={''} onClick={toogleNav}><span>all products</span></Link>
-                    <Link to={''} className='d-lg-none'><span>ABOUT</span></Link>
-                    <Link to={''} className='d-lg-none'><span>CONTACT</span></Link>
+                    <Link to={'/products'} onClick={closeNav}><span>Skincare</span></Link>
+                    <Link to={''} onClick={closeNav}><span>Haircare</span></Link>
+                    <Link to={''} onClick={closeNav}><span>bath & body</span></Link>
+                    <Link to={''} onClick={closeNav}><span>mens</span></Link>
+                    <Link to={''} onClick={closeNav}><span>gifting</span></Link>
+                    <Link to={''} onClick={closeNav}><span>wellness</span></Link>
+                    <Link to={''} onClick={closeNav}><span>best sellers</span></Link>
+                    <Link to={''} onClick={closeNav}><span>all products</span></Link>
+                    <Link to={''} onClick={closeNav} className='d-lg-none'><span>ABOUT</span></Link>
+                    <Link to={''} onClick={toogleContactForm} className='d-lg-none'><span>CONTACT</span></Link>
                 </div>
             </div>
             {

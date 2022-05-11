@@ -23,14 +23,14 @@ function ProductCardS({ name, img, category, link, priceSpec, ratings }) {
             <div className='product_card_data'>
                 <Link to={link} className='dec_none'>
                     <span className='text_biege category'>{category}</span>
-                    <h5>{name}</h5>
+                    <h5 className='pc_name'>{name.length > 18 ? name.slice(0, 18) + '...' : name}</h5>
                 </Link>
                 <div className='d-flex justify-content-between align-items-center'>
                     {
                         offerPrice ?
                             <div className='product_card_price_spec'>
                                 <span className='offer_price'>{offerPrice}</span>
-                                <del className='mrp'>{mrp}</del>
+                                <del className='mrp'>₹{mrp}</del>
                                 <span className='discount'>{discount}% off</span>
                             </div> :
                             <div className='product_card_price_spec'>

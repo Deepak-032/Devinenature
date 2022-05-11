@@ -34,7 +34,7 @@
     }
 
     .products_collage_img_container p {
-        font-size: 8px;
+        font-size: 8px !important;
     }
 
     .products_collage_img_container>div {

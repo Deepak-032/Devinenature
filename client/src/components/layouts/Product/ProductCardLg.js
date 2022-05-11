@@ -2,7 +2,7 @@ import React from 'react'
 import './ProductCardLg.css'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { Link } from 'react-router-dom'
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 import Rating from '@mui/material/Rating'
 
 const StyledRating = styled(Rating)({
@@ -12,7 +12,7 @@ const StyledRating = styled(Rating)({
     '& .MuiRating-iconHover': {
         color: '#9F752A',
     },
-});
+})
 
 function ProductCardLg({ name, img, category, description, link, priceSpec, ratings }) {
     const { mrp, offerPrice } = priceSpec
@@ -47,7 +47,7 @@ function ProductCardLg({ name, img, category, description, link, priceSpec, rati
                 </Link>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
-                        <button onClick={addToCart}>ADD TO CART</button>
+                        <button className='add_to_cart_button' onClick={addToCart}>ADD TO CART</button>
                         <div className='add_to_wishlist' onClick={addToWishlist}>
                             <AiOutlineHeart />
                         </div>
@@ -56,7 +56,7 @@ function ProductCardLg({ name, img, category, description, link, priceSpec, rati
                         offerPrice ?
                             <div className='product_card_price_spec'>
                                 <span className='offer_price'>{offerPrice}</span>
-                                <del className='mrp'>{mrp}</del>
+                                <del className='mrp'>₹{mrp}</del>
                                 <span className='discount'>{discount}% off</span>
                             </div> :
                             <div className='product_card_price_spec'>

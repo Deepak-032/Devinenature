@@ -1,0 +1,76 @@
+.scroller_arrow {
+    width: 28px;
+    height: 28px;
+    background-color: #F8F2EB;
+    border: none;
+    color: #896229;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroller_arrow_left {
+    left: -40px;
+}
+
+.scroller_arrow_right {
+    right: -40px;
+}
+
+@media (min-width: 992px) {
+
+    .similar_products .product_card {
+        padding-top: 0 !important;
+        margin-right: 1.5rem;
+        width: 250px;
+    }
+
+    .similar_products .product_card_img {
+        max-height: 300px;
+    }
+
+    .similar_products .pc_name {
+        font-size: 1rem;
+    }    
+
+    .similar_products .category {
+        font-size: 0.75rem;
+    }    
+
+    .similar_products .offer_price {
+        font-size: 1.25rem;
+    }    
+
+    .similar_products .mrp,
+    .similar_products .discount {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 991px) {
+    .similar_products .product_card {
+        padding-top: 0 !important;
+        margin-right: 0.75rem;
+        width: 167px;
+    }
+
+    .similar_products .product_card_img {
+        max-height: 193px !important;
+    }
+
+    .scroller_arrow {
+        width: 18px;
+        height: 18px;
+    }
+
+    .scroller_arrow_left {
+        left: 2px;
+    }
+
+    .scroller_arrow_right {
+        right: 2px;
+    }
+}

@@ -11,17 +11,26 @@ ul {
     margin: 0;
 }
 
-.font14 {
-    font-size: 14px;
+.font12 {
+    font-size: 12px !important;
 }
 
-.font22 {
-    font-size: 22px;
+.font14 {
+    font-size: 14px !important;
 }
 
 .font20 {
-    font-size: 20px;
+    font-size: 20px !important;
 }
+
+.font22 {
+    font-size: 22px !important;
+}
+
+.font24 {
+    font-size: 24px !important;
+}
+
 
 .dec_none {
     text-decoration: none;
@@ -74,8 +83,35 @@ input[type="search"]::-webkit-search-cancel-button {
     margin-top: 20px;
 }
 
+.action_btn1 {
+    color: #fff;
+    font-size: 14px;
+    background-color: #373737;
+    border: 2px solid #373737;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 11px 32px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.action_btn2 {
+    color: #373737;
+    font-size: 14px;
+    background-color: transparent;
+    border: 2px solid #373737;
+    border-radius: 4px;
+    padding: 11px 32px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
 .text_biege {
     color: #896229;
+}
+
+.my_mt_4 {
+    margin-top: 1.5rem !important;
 }
 
 .mt_max {
@@ -137,10 +173,27 @@ textarea {
     padding-right: 0;
 }
 
+.border_bottom_biege {
+    border-bottom: 2px solid #896229;
+}
+
+.border_biege {
+    border: 2px solid #896229;
+}
+
+button:disabled {
+    color: rgb(0, 0, 0, 0.2);
+    background-color: rgb(0, 0, 0, 0.05);
+}
+
 @media (max-width: 991px) {
     .container {
         padding-right: 1.5rem;
         padding-left: 1.5rem;
+    }
+
+    .diable_link_in_lg {
+        pointer-events: all;
     }
 
     .btn_bg_white {
@@ -148,6 +201,16 @@ textarea {
         border-radius: 6px;
         font-weight: 600;
         font-size: 14px;
+    }
+
+    .action_btn1 {
+        padding: 8px 25px;
+        margin-right: 15px;
+    }
+
+    .action_btn2 {
+        padding: 8px 25px;
+        margin-right: 15px;
     }
 
     .mobile_max_width_to_100 {
@@ -195,14 +258,30 @@ textarea {
     .h_line {
         margin: auto;
     }
+
+    .row {
+        margin-left: -0.375rem;
+        margin-right: -0.375rem;
+    }
+
+    .row>* {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+
+    .my_mt_4 {
+        margin-top: 0.75rem !important;
+    }
 }
 
 /* To hide the scrollbar */
+.hide_scrollbar::-webkit-scrollbar,
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
     display: none;
     /* Safari and Chrome */
 }
 
+.hide_scrollbar,
 .react-horizontal-scrolling-menu--scroll-container {
     -ms-overflow-style: none;
     /* Internet Explorer 10+ */

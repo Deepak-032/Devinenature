@@ -48,7 +48,7 @@ function ProductsListing() {
                 </div>
             </div>
             <Products products={products} />
-            <BSP products={products}/>
+            <BSP products={products} />
             <Reviews reviews={reviews} />
             <h1 className='text-center mt-5'>Video</h1>
             <h1 className='text-center mt-5'>Footer</h1>

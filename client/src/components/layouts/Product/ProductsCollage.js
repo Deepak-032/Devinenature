@@ -8,7 +8,7 @@ function ProductsCollage() {
             <h5 className='text_biege text-center'>Made For You with Love</h5>
             <h2 className='fw-bold mb-4 text-center'>Best Selling Products</h2>
             <div className='row'>
-                <div className='col-6 col-lg-3 mt-4'>
+                <div className='col-6 col-lg-3 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp1.png' className='w-100' alt='' />
                         <div>
@@ -17,7 +17,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-6 col-lg-3 mt-4'>
+                <div className='col-6 col-lg-3 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp2.png' className='w-100' alt='' />
                         <div>
@@ -26,7 +26,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-12 col-lg-6 mt-4'>
+                <div className='col-12 col-lg-6 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp3.png' className='w-100' alt='' />
                         <div>
@@ -37,7 +37,7 @@ function ProductsCollage() {
                 </div>
             </div>
             <div className='row d-none d-lg-flex'>
-                <div className='col-lg-3 mt-4'>
+                <div className='col-lg-3 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp4.png' className='w-100' alt='' />
                         <div>
@@ -46,7 +46,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-12 col-lg-9 mt-4'>
+                <div className='col-12 col-lg-9 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp5.png' className='w-100' alt='' />
                         <div>
@@ -57,7 +57,7 @@ function ProductsCollage() {
                 </div>
             </div>
             <div className='row'>
-                <div className='col-6 col-lg-3 mt-4'>
+                <div className='col-6 col-lg-3 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp1.png' className='w-100' alt='' />
                         <div>
@@ -66,7 +66,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-6 col-lg-3 mt-4'>
+                <div className='col-6 col-lg-3 my_mt_4'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp2.png' className='w-100' alt='' />
                         <div>
@@ -75,7 +75,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-6 col-lg-3 mt-4 d-none d-lg-block'>
+                <div className='col-6 col-lg-3 my_mt_4 d-none d-lg-block'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp1.png' className='w-100' alt='' />
                         <div>
@@ -84,7 +84,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-6 col-lg-3 mt-4 d-none d-lg-block'>
+                <div className='col-6 col-lg-3 my_mt_4 d-none d-lg-block'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp2.png' className='w-100' alt='' />
                         <div>
@@ -93,7 +93,7 @@ function ProductsCollage() {
                         </div>
                     </Link>
                 </div>
-                <div className='col-12 mt-4 d-lg-none'>
+                <div className='col-12 my_mt_4 d-lg-none'>
                     <Link to={''} className='products_collage_img_container'>
                         <img src='/assets/bsp6.png' className='w-100' alt='' />
                         <div>
