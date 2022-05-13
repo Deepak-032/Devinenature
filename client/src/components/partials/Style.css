@@ -1,0 +1,26 @@
+.show_dropdown {
+    max-height: 500px;
+    opacity: 1;
+    transition: max-height 0.5s ease-in, opacity 0.7s ease-in;
+}
+
+.hide_dropdown {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: #fff;
+    transition: all 0.4s ease-out;
+}
+
+.dropdown>div {
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.dropdown>div:hover {
+    color: #9F752A;
+}
+
+.dropdown_heading {
+    cursor: pointer;
+}

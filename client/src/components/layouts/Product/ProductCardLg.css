@@ -11,6 +11,7 @@
     max-height: 858px;
     width: 100%;
     background-size: cover;
+    background-position: center;
 }
 
 .product_card_data_lg {
@@ -20,8 +21,11 @@
     padding: 9px 15px 20px 15px;
 }
 
+.category {
+    font-size: 12px;
+}
 
-.product_card_data_lg h5 {
+.product_card_data_lg h6 {
     font-weight: 600;
     color: #000;
 }

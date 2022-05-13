@@ -13,6 +13,7 @@
     min-height: 194px;
     width: 100%;
     background-size: cover;
+    background-position: center;
 }
 
 .product_card_data {
@@ -21,9 +22,12 @@
     padding: 9px 15px 20px 15px;
 }
 
-.product_card_data h5 {
+.category {
+    font-size: 12px;
+}
+
+.product_card_data h6 {
     font-weight: 600;
-    margin-bottom: 12px;
     color: #000;
 }
 
@@ -32,25 +36,25 @@
     font-size: 12px;
     color: #DB4242;
     position: relative;
-    top: -8px;
+    top: -7px;
     font-family: system-ui, serif;
 }
 
 .offer_price {
     color: #DB4242;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
 }
 
 .mrp {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #9F9F9F;
     font-family: system-ui, serif;
 }
 
 .discount {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #9F752A;
 }
@@ -79,16 +83,16 @@
 
 .ratings {
     background-color: #fff;
-    padding: 2px 7px 2px 9px;
+    padding: 1px 6px 1px 8px;
     border-radius: 20px;
     color: #9F752A;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    position: relative;
-    left: 74%;
-    top: 5%;
+    position: absolute;
+    right: 4%;
+    top: 4%;
     font-size: 14px;
 }
 
@@ -110,7 +114,7 @@
         font-size: 8px;
     }
 
-    .product_card_data h5 {
+    .product_card_data h6 {
         margin-bottom: 6px;
         font-size: 14px;
     }
@@ -144,11 +148,9 @@
     }
 
     .ratings {
-        padding: 2px 5px;
+        padding: 1px 4px 1px 6px;
         font-size: 8px;
         font-weight: 600;
-        left: 75%;
-        top: 2%;
     }
 
     .product_card:hover {

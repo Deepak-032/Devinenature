@@ -5,6 +5,7 @@ import Navbar from './components/layouts/Header/Navbar'
 import Search from './components/layouts/Search'
 import ProductDetails from './components/Product/ProductDetails'
 import ProductsListing from './components/Product/ProductsListing'
+import './App.css'
 
 function App() {
 

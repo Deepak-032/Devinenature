@@ -31,23 +31,6 @@
     .similar_products .product_card_img {
         max-height: 300px;
     }
-
-    .similar_products .pc_name {
-        font-size: 1rem;
-    }    
-
-    .similar_products .category {
-        font-size: 0.75rem;
-    }    
-
-    .similar_products .offer_price {
-        font-size: 1.25rem;
-    }    
-
-    .similar_products .mrp,
-    .similar_products .discount {
-        font-size: 14px;
-    }
 }
 
 @media (max-width: 991px) {
@@ -62,15 +45,9 @@
     }
 
     .scroller_arrow {
-        width: 18px;
-        height: 18px;
-    }
-
-    .scroller_arrow_left {
-        left: 2px;
-    }
-
-    .scroller_arrow_right {
-        right: 2px;
+        position: static;
+        margin: .5rem;
+        font-size: 24px;
+        background-color: transparent !important;
     }
 }

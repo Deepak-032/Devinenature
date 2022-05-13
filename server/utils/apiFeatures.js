@@ -21,7 +21,7 @@ class ApiFeatures {
         const removeFields = ["search", "page", "limit"]
         removeFields.forEach(key => delete queryCopy[key])
         
-        // Filter for price and rating
+        // Filter for price, rating and category
         let queryStr = JSON.stringify(queryCopy)
         queryStr = queryStr.replace("price", "priceSpecs.0.offerPrice")
         queryCopy = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, key => `$${key}`)

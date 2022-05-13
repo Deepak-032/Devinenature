@@ -21,9 +21,9 @@ function ProductCardS({ name, img, category, link, priceSpec, ratings }) {
                 </div>
             </Link>
             <div className='product_card_data'>
-                <Link to={link} className='dec_none'>
-                    <span className='text_biege category'>{category}</span>
-                    <h5 className='pc_name'>{name.length > 18 ? name.slice(0, 18) + '...' : name}</h5>
+                <Link to={link} className='dec_none hover_underline_animation'>
+                    <span className='text_biege category font12'>{category}</span>
+                    <h6>{name.length > 18 ? name.slice(0, 18) + '...' : name}</h6>
                 </Link>
                 <div className='d-flex justify-content-between align-items-center'>
                     {

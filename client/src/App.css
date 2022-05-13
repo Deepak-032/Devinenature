@@ -1,0 +1,54 @@
+.hover_underline_animation {
+    position: relative;
+}
+
+.hover_underline_animation:after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #896229;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+}
+
+.hover_underline_animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Paginator */
+.MuiPagination-ul {
+    justify-content: center !important;
+}
+
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    color: #896229 !important;
+    background-color: transparent !important;
+}
+
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-disabled {
+    color: inherit;
+}
+
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root,
+.css-1v2lvtn-MuiPaginationItem-root {
+    color: rgb(0 0 0 / 0.4) !important;
+    background-color: transparent !important;
+}
+
+.MuiPaginationItem-previousNext {
+    color: #896229 !important;
+}
+
+@media (max-width: 991px) {
+    .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root,
+    .css-1v2lvtn-MuiPaginationItem-root {
+        min-width: auto !important;
+        margin: 0 5px !important;
+        padding: 0 3px !important;
+    }
+}

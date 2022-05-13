@@ -32,7 +32,7 @@ function ProductCardLg({ name, img, category, description, link, priceSpec, rati
                 <div className='product_card_img_lg position-relative' style={{ backgroundImage: `url(${img})` }} />
             </Link>
             <div className='product_card_data_lg'>
-                <Link to={link} className='dec_none'>
+                <Link to={link} className='dec_none hover_underline_animation'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <span className='text_biege category'>{category}</span>
                         <StyledRating
@@ -42,9 +42,9 @@ function ProductCardLg({ name, img, category, description, link, priceSpec, rati
                             precision={0.2}
                         />
                     </div>
-                    <h5>{name}</h5>
-                    <p>{description}</p>
+                    <h6>{name}</h6>
                 </Link>
+                <p>{description}</p>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                         <button className='add_to_cart_button' onClick={addToCart}>ADD TO CART</button>
