@@ -36,6 +36,20 @@
     background-color: #fff;
 }
 
+.show_all_images>.close_icon {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 30px !important;
+    min-width: 30px;
+    height: 30px !important;
+    border-radius: 100%;
+    background-color: rgb(0 0 0 / 0.2);
+}
+
 .show_all_images>div {
     width: 100% !important;
     height: auto !important;
@@ -58,7 +72,7 @@
 }
 
 @media (max-width: 767px) {
-    .product_image img{
+    .product_image img {
         height: 350px !important;
     }
 
