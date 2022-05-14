@@ -131,7 +131,7 @@ function Navbar() {
             <div className='nav_bottom_container'>
                 <div className={`container nav_bottom ${click ? 'active' : ''}`}>
                     <Link to={'/products'} onClick={closeNav}><span>Skincare</span></Link>
-                    <Link to={''} onClick={closeNav}><span>Haircare</span></Link>
+                    <Link to={'/product'} onClick={closeNav}><span>Haircare</span></Link>
                     <Link to={''} onClick={closeNav}><span>bath & body</span></Link>
                     <Link to={''} onClick={closeNav}><span>mens</span></Link>
                     <Link to={''} onClick={closeNav}><span>gifting</span></Link>

@@ -1,0 +1,24 @@
+.product_review_listing .product_review>div>*,
+.product_review_listing .product_review>div>div>* {
+    margin-bottom: .5rem;
+    font-size: 14px;
+}
+
+@media (max-width: 991px) {
+    .product_review {
+        padding-bottom: .75rem;
+        border-bottom: 2px solid #9F752A;
+    }
+
+    .write_review {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .product_reviews_count {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

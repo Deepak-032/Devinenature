@@ -11,6 +11,7 @@ import CounterInput from "react-counter-input";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import SimilarProducts from '../layouts/Product/SimilarProducts'
 import Reviews from '../layouts/Reviews/Reviews'
+import CustomerReviews from '../Reviews/CustomerReviews'
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -50,6 +51,14 @@ const review = {
     clientName: 'Client Name',
     review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis'
 }
+const custReview = {
+    name: "Testimonial Name",
+    comment: "Great product ever used, Must Buy!",
+    description: product.about,
+    rating: 4.8,
+    createdAt: "2022-04-11T22:19:26.494Z"
+}
+const custReviews = Array(6).fill(custReview)
 const reviews = [review, review, review, review, review, review, review, review]
 
 function ProductDetails() {
@@ -88,7 +97,7 @@ function ProductDetails() {
                     <div className='col-12 col-lg-7 product_details'>
                         <div className='product_data'>
                             <h2 className='fw-bold'>{product.name}</h2>
-                            <div className='Product_reviews'>
+                            <div className='product_reviews'>
                                 <StyledRating
                                     name="read-only"
                                     value={product.ratings}
@@ -158,7 +167,7 @@ function ProductDetails() {
             </div>
             <SimilarProducts products={products} />
             <BSP products={products} />
-            <h1 className='text-center mt-5'>Reviews</h1>
+            <CustomerReviews custReviews={custReviews} product={product} />
             <Reviews reviews={reviews} />
             <h1 className='text-center mt-5'>Video</h1>
             <h1 className='text-center mt-5'>Footer</h1>
