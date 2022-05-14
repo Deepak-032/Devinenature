@@ -6,6 +6,7 @@ import Search from './components/layouts/Search'
 import ProductDetails from './components/Product/ProductDetails'
 import ProductsListing from './components/Product/ProductsListing'
 import './App.css'
+import CustomerReviewsAll from './components/Reviews/CustomerReviewsAll'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/products' element={<ProductsListing />} />
         <Route path='/product' element={<ProductDetails />} />
+        <Route path='/product/reviews' element={<CustomerReviewsAll />} />
         <Route path='/' element={<Home />} />
       </Routes>
     </>

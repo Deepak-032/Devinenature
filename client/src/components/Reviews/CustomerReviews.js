@@ -17,7 +17,7 @@ function CustomerReviews({ custReviews, product }) {
     return (
         <div className='container mt_max'>
             <h5 className='text_biege text-center'>Made For You with Love</h5>
-            <h2 className='fw-bold mb-5 text-center'>Reviews By Our Customer</h2>
+            <h2 className='fw-bold mb-5 text-center'>Reviews By Our Customers</h2>
             <div className='row'>
                 <div className='col-12 col-lg-4'>
                     <div className='product_reviews_count'>
@@ -60,7 +60,7 @@ function CustomerReviews({ custReviews, product }) {
                             </div>
                         </div>
                     ))}
-                    <Link to={'/reviews'} className='btn_submit font14 write_review'>SEE ALL REVIEWS</Link>
+                    <Link to={'reviews'} className='btn_submit font14 write_review'>SEE ALL REVIEWS</Link>
                 </div>
             </div>
         </div>

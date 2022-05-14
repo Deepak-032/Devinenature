@@ -8,7 +8,7 @@ import { IoMdStar, IoMdStarOutline } from "react-icons/io"
 import './Products.css'
 import Backdrop from '@mui/material/Backdrop'
 import Pagination from '@mui/material/Pagination'
-import PaginationItem from '@mui/material/PaginationItem';
+import PaginationItem from '@mui/material/PaginationItem'
 
 const PrettoSlider = styled(Slider)({
     color: '#896229',
