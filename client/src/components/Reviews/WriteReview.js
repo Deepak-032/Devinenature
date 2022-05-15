@@ -40,7 +40,7 @@ function WriteReview() {
             <div className='bg_biege_light pt-2 pb-2'>
                 <div className='container'>
                     <div className='row justify-content-center'>
-                        <h5 className='col-12 col-lg-8 text-white fw-bold m-0'>Name of the Person</h5>
+                        <h5 className='col-12 col-lg-8 text-white m-0'>Name of the Person</h5>
                     </div>
                 </div>
             </div>
