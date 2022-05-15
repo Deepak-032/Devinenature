@@ -25,14 +25,14 @@ const StyledRating = styled(Rating)({
 const product = {
     name: 'Product Name Lorem Ipsum Dolor Amet',
     images: ["/assets/product1.png", "/assets/pc1.png", "/assets/pc2.png", "/assets/bsp3.png", "/assets/contact.png", "/assets/product1.png"],
-    category: 'Category',
+    
     priceSpecs: [{
         size: 600,
         mrp: 999,
         offerPrice: 678,
         stock: 10
     },
-    {
+    {category: 'Category',
         size: 800,
         mrp: 1209,
         offerPrice: 928,

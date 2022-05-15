@@ -110,6 +110,10 @@ input[type="search"]::-webkit-search-cancel-button {
     color: #896229;
 }
 
+.bg_biege_light {
+    background-color: #BC9E69;
+}
+
 .my_mt_4 {
     margin-top: 1.5rem !important;
 }
@@ -140,7 +144,8 @@ input[type="search"]::-webkit-search-cancel-button {
     margin-left: 10px;
 }
 
-.input label {
+.input label,
+.input_label {
     color: #9F9F9F;
     font-size: 12px;
     display: flex;
@@ -149,7 +154,8 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .input input,
-.input textarea {
+.input textarea,
+.input_field {
     border: none;
     border-bottom: 2px solid #707070;
     font-size: 16px;
@@ -160,7 +166,8 @@ input[type="search"]::-webkit-search-cancel-button {
     margin-bottom: 1.5rem;
 }
 
-.input :focus {
+.input *:focus,
+.input_field:focus {
     outline: none;
 }
 
@@ -192,6 +199,27 @@ button:disabled {
 
 .price_symbol {
     font-family: system-ui, serif;
+}
+
+.square_image {
+    position: relative;
+    width: 100%;
+}
+
+.square_image:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.square_image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 @media (max-width: 991px) {

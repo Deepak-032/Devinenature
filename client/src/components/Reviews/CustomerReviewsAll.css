@@ -4,12 +4,6 @@
     font-size: 14px;
 }
 
-.product_img_review_page {
-    width: 100%;
-    max-height: 416px;
-    object-fit: cover;
-}
-
 @media (max-width: 991px) {
     .product_review {
         padding-bottom: .75rem;
@@ -26,14 +20,5 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-    
-    .product_img_review_page {
-        max-height: 360px;
-    }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-    .product_img_review_page {
-        max-height: 680px;
     }
 }

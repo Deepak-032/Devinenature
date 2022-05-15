@@ -69,7 +69,9 @@ function CustomerReviewsAll() {
                 <div className='text_biege font14'>{product.name} {'>'} Customer Reviews</div>
                 <div className='row mt-4'>
                     <div className='col-12 col-lg-4'>
-                        <img className='product_img_review_page' src={product.images[0]} alt='' />
+                        <div className='square_image'>
+                            <img src={product.images[0]} alt='' />
+                        </div>
                         <h4 className='fw-bold mt-4'>{product.name}</h4>
                         <div className='product_reviews_count mt-3'>
                             <h3 className='text_biege'>
@@ -87,7 +89,7 @@ function CustomerReviewsAll() {
                                 <u className='text_biege ms-2'>{product.reviews} Reviews</u>
                             </div>
                         </div>
-                        <Link to={'/reviews'} className='mt-4 btn_submit ps-3 pe-3 font14 write_review'>WRITE A REVIEW</Link>
+                        <Link to={'/product/new/review'} className='mt-4 btn_submit ps-3 pe-3 font14 write_review'>WRITE A REVIEW</Link>
                     </div>
                     <div className='col-12 col-lg-8 product_review_listing'>
                         <h3 className='fw-bold mb-4'>Customer Reviews</h3>
