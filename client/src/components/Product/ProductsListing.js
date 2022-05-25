@@ -44,7 +44,7 @@ function ProductsListing() {
                 <div className='text_biege font14'>Home {'>'} Product Category Page</div>
                 <div className='row mt-5 d-none d-lg-flex'>
                     <h2 className='col-3 fw-bold'>Category<br />Name</h2>
-                    <p className='col-7'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p className='col-8 font20'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
             </div>
             <Products products={products} />

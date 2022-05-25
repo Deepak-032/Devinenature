@@ -23,7 +23,6 @@
 @media (min-width: 992px) {
 
     .similar_products .product_card {
-        padding-top: 0 !important;
         margin-right: 1.5rem;
         width: 250px;
     }
@@ -35,7 +34,6 @@
 
 @media (max-width: 991px) {
     .similar_products .product_card {
-        padding-top: 0 !important;
         margin-right: 0.75rem;
         width: 167px;
     }

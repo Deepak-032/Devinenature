@@ -143,14 +143,14 @@
     .nav_top_right {
         background-color: #F8F2EB;
         width: 100%;
-        padding: 17px 0;
+        padding: 12px 0;
         justify-content: center;
         margin-top: 1rem;
     }
 
     .nav_top_right>*:not(:last-child) {
         margin: 0 12px;
-        font-size: 20px;
+        /* font-size: 20px; */
     }
 
     .nav_bottom {

@@ -8,19 +8,24 @@ import ProductsListing from './components/Product/ProductsListing'
 import './App.css'
 import CustomerReviewsAll from './components/Reviews/CustomerReviewsAll'
 import WriteReview from './components/Reviews/WriteReview'
+import Cart from './components/Cart/Cart'
 
 function App() {
 
   return (
     <>
-      <Navbar />
+
       <Routes>
-        <Route path='/search' element={<Search />} />
-        <Route path='/products' element={<ProductsListing />} />
-        <Route path='/product' element={<ProductDetails />} />
-        <Route path='/product/reviews' element={<CustomerReviewsAll />} />
-        <Route path='/product/new/review' element={<WriteReview />} />
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Navbar />} >
+          <Route index element={<Home />} />
+          <Route path='search' element={<Search />} />
+          <Route path='products' element={<ProductsListing />} />
+          <Route path='product' element={<ProductDetails />} />
+          <Route path='product/reviews' element={<CustomerReviewsAll />} />
+          <Route path='product/new/review' element={<WriteReview />} />
+          <Route path='cart' element={<Cart />} />
+        </Route>
+        
       </Routes>
     </>
   )

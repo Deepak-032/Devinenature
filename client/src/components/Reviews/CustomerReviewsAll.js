@@ -72,7 +72,7 @@ function CustomerReviewsAll() {
                         <div className='square_image'>
                             <img src={product.images[0]} alt='' />
                         </div>
-                        <h4 className='fw-bold mt-4'>{product.name}</h4>
+                        <h3 className='fw-bold mt-4'>{product.name}</h3>
                         <div className='product_reviews_count mt-3'>
                             <h3 className='text_biege'>
                                 {product.ratings}
@@ -92,7 +92,7 @@ function CustomerReviewsAll() {
                         <Link to={'/product/new/review'} className='mt-4 btn_submit ps-3 pe-3 font14 write_review'>WRITE A REVIEW</Link>
                     </div>
                     <div className='col-12 col-lg-8 product_review_listing'>
-                        <h3 className='fw-bold mb-4'>Customer Reviews</h3>
+                        <h2 className='fw-bold mb-4'>Customer Reviews</h2>
                         {custReviews?.map(review => (
                             <div className='row mb-4 product_review'>
                                 <div className='col-12 col-lg-3'>
@@ -107,7 +107,7 @@ function CustomerReviewsAll() {
                                 </div>
                                 <div className='col-12 col-lg-9'>
                                     <div className='d-flex flex-wrap justify-content-between'>
-                                        <span className='fw600'>{review.comment}</span>
+                                        <span className='fw600'>{review.comment}</span>&nbsp;&nbsp;
                                         <span>Date: {review.createdAt.split('T')[0]}</span>
                                     </div>
                                     <p>{review.description}</p>

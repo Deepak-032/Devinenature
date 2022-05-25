@@ -48,6 +48,7 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, "Please enter product Category"],
+        index: true,
     },
     ratings: {
         type: Number,
@@ -88,6 +89,11 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
+    },
+    bestSelling: {
+        type: Boolean,
+        default: false,
+        index: true,
     },
     createdAt: {
         type: Date,

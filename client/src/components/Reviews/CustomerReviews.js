@@ -36,7 +36,7 @@ function CustomerReviews({ custReviews, product }) {
                             <Link to={''} className='text_biege ms-2'>{product.reviews} Reviews</Link>
                         </div>
                     </div>
-                    <Link to={'new/review'} className='mt-4 btn_submit ps-3 pe-3 font14 write_review'>WRITE A REVIEW</Link>
+                    <Link to={'new/review'} className='mt-4 btn_submit ps-3 pe-3 write_review'>WRITE A REVIEW</Link>
                 </div>
                 <div className='col-12 col-lg-8 product_review_listing'>
                     {custReviews?.map(review => (
@@ -53,14 +53,14 @@ function CustomerReviews({ custReviews, product }) {
                             </div>
                             <div className='col-12 col-lg-9'>
                                 <div className='d-flex flex-wrap justify-content-between'>
-                                    <span className='fw600'>{review.comment}</span>
+                                    <span className='fw600'>{review.comment}</span>&nbsp;&nbsp;
                                     <span>Date: {review.createdAt.split('T')[0]}</span>
                                 </div>
                                 <p>{review.description}</p>
                             </div>
                         </div>
                     ))}
-                    <Link to={'reviews'} className='btn_submit font14 write_review'>SEE ALL REVIEWS</Link>
+                    <Link to={'reviews'} className='btn_submit write_review'>SEE ALL REVIEWS</Link>
                 </div>
             </div>
         </div>

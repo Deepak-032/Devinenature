@@ -1,0 +1,16 @@
+.cart_apply_discount {
+    padding: 0.75rem;
+    background-color: #F8F2EB;
+    margin: 0;
+}
+
+.cart_apply_discount_input,
+.cart_apply_discount_input:focus {
+    outline: none;
+    border: none;
+    font-size: 14px;
+}
+
+.cart_summary td {
+    padding: 0.5rem 0;
+}

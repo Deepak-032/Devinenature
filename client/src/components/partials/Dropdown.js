@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import './Style.css'
 
-function Dropdown({ heading, children }) {
+function Dropdown({ heading, children, bgColor, containerClassName, headingClassName }) {
     const [state, setState] = useState(false)
 
     return (
-        <div className='border_bottom_biege mt-2'>
+        <div className={containerClassName} style={{ backgroundColor: bgColor }}>
             <h6
-                className='dropdown_heading fw600 d-flex justify-content-between'
+                className={`dropdown_heading d-flex justify-content-between align-items-center ${headingClassName}`}
                 onClick={() => setState(!state)}
             >
                 {heading}
@@ -17,7 +17,7 @@ function Dropdown({ heading, children }) {
                     <FiChevronDown size={24} color='#9F752A' />
                 }
             </h6>
-            <div className={`dropdown ${state ? 'show_dropdown' : 'hide_dropdown'}`}>{children}</div>
+            <div className={`dropdown font14 ${state ? 'show_dropdown' : 'hide_dropdown'}`}>{children}</div>
         </div>
     )
 }

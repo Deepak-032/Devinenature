@@ -5,9 +5,9 @@ import Rating from '@mui/material/Rating'
 import { styled } from '@mui/material/styles'
 import './ProductDetails.css'
 import { Link } from 'react-router-dom'
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import CounterInput from "react-counter-input";
+import ToggleButton from '@mui/material/ToggleButton'
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+import CounterInput from "react-counter-input"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import SimilarProducts from '../layouts/Product/SimilarProducts'
 import Reviews from '../layouts/Reviews/Reviews'
@@ -25,17 +25,23 @@ const StyledRating = styled(Rating)({
 const product = {
     name: 'Product Name Lorem Ipsum Dolor Amet',
     images: ["/assets/product1.png", "/assets/pc1.png", "/assets/pc2.png", "/assets/bsp3.png", "/assets/contact.png", "/assets/product1.png"],
-    
+    category: 'Category',
     priceSpecs: [{
         size: 600,
         mrp: 999,
         offerPrice: 678,
         stock: 10
     },
-    {category: 'Category',
-        size: 800,
+    // {
+    //     size: 800,
+    //     mrp: 1209,
+    //     offerPrice: 928,
+    //     stock: 0
+    // },
+    {
+        size: 1000,
         mrp: 1209,
-        offerPrice: 928,
+        offerPrice: 0,
         stock: 0
     }],
     ratings: 3.6,
@@ -111,11 +117,11 @@ function ProductDetails() {
                                 offerPrice ?
                                     <div className='product_card_price_spec'>
                                         <span className='offer_price font24'>{offerPrice}</span>
-                                        <del className='mrp'>₹{mrp}</del>
-                                        <span className='discount'>{discount}% off</span>
+                                        <del className='mrp font16'>₹{mrp}</del>
+                                        <span className='discount font16'>{discount}% off</span>
                                     </div> :
                                     <div className='product_card_price_spec'>
-                                        <span className='offer_price'>{mrp}</span>
+                                        <span className='offer_price font24'>{mrp}</span>
                                     </div>
                             }
                             <div className='product_stock fw-bold'>

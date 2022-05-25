@@ -1,3 +1,8 @@
+/* headings 1 h2 fw700 */
+/* headings 2 h3 fw700 */
+/* headings 3 h5 fw600 */
+/* headings 4 h6 fw600 */
+
 /* h1, h2, h3, h4, h5, h6 {
     font-family: Inter;
 } */
@@ -43,6 +48,8 @@
 .css-1v2lvtn-MuiPaginationItem-root {
     color: rgb(0 0 0 / 0.4) !important;
     background-color: transparent !important;
+    font-weight: 600 !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .MuiPaginationItem-previousNext {

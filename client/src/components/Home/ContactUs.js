@@ -15,12 +15,12 @@ function ContactUs({ reference }) {
                             <label className='col-12 col-md-6 mt-4'>Name<input /></label>
                             <label className='col-12 col-md-6 mt-4'>Email<input type={'email'} /></label>
                         </div>
-                        <label>Suject<input />
+                        <label>Subject<input />
                         </label>
                         <label>Contact Number<input />
                         </label>
                         <label>Your Message<textarea /></label>
-                        <button className='btn_submit' type={'submit'}>Submit</button>
+                        <button className='btn_submit' type={'submit'}>SUBMIT</button>
                     </form>
                 </div>
             </div>

@@ -40,7 +40,7 @@ function WriteReview() {
             <div className='bg_biege_light pt-2 pb-2'>
                 <div className='container'>
                     <div className='row justify-content-center'>
-                        <h5 className='col-12 col-lg-8 text-white m-0'>Name of the Person</h5>
+                        <h5 className='col-12 col-lg-8 text-white m-0 fw600'>Nitish Malhotra</h5>
                     </div>
                 </div>
             </div>
@@ -50,32 +50,32 @@ function WriteReview() {
                         <div className='square_image'><img src={product.images[0]} alt='' /></div>
                     </div>
                     <div className='col-12 col-lg-6'>
-                        <h4 className='fw-bold border_bottom_biege pb-3'>{product.name}</h4>
-                        <form className='pt-2 mb-5'>
-                            <div className='mt-4 pb-3' style={{ lineHeight: 0 }}>
-                                <h5 className='fw600'>Overall Rating</h5>
+                        <h2 className='fw-bold border_bottom_biege pb-3 mb-3'>{product.name}</h2>
+                        <form className='mb-5'>
+                            <div className='mb-4 pb-2' style={{ lineHeight: 0 }}>
+                                <h5 className='fw600 mb-2'>Overall Rating</h5>
                                 <StyledRating
                                     name="rating"
                                     value={rating}
                                     onChange={(e, r) => setRating(r)}
                                 />
                             </div>
-                            <div className='mt-4 pb-3'>
-                                <h5 className='fw600'>Add a Headline</h5>
+                            <div className='mb-4 pb-2'>
+                                <h5 className='fw600 mb-2'>Add a Headline</h5>
                                 <input
-                                    className='input_field border_bottom_biege w-100 mt-1'
+                                    className='input_field border_bottom_biege w-100 '
                                     placeholder='Please write a short message'
                                 />
                             </div>
-                            <div className='mt-4 pb-3'>
-                                <h5 className='fw600'>Tell us More</h5>
+                            <div className='mb-4 pb-2'>
+                                <h5 className='fw600 mb-2'>Tell us More</h5>
                                 <textarea
-                                    className='w-100 mt-1'
+                                    className='w-100 '
                                     style={{ height: '150px', padding: '0.25rem 0.5rem', border: '2px solid #896229' }}
                                     placeholder='Let us know about your experience'
                                 />
                             </div>
-                            <button className='btn_submit mt-4 mb-3'>SUBMIT REVIEW</button>
+                            <button className='btn_submit m-0'>SUBMIT REVIEW</button>
                         </form>
                     </div>
                 </div>

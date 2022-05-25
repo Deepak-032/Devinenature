@@ -46,6 +46,10 @@
     text-decoration: none;
 }
 
+.product_card_img_lg:hover {
+    opacity: 0.85;
+}
+
 /* .product_card_lg:hover {
     transform: scale(1.02);
     transition: .5s;

@@ -14,12 +14,12 @@
 
 .dropdown>div {
     padding-bottom: 0.5rem;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
-.dropdown>div:hover {
+/* .dropdown>div:hover {
     color: #9F752A;
-}
+} */
 
 .dropdown_heading {
     cursor: pointer;

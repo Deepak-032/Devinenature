@@ -33,7 +33,7 @@ function Search() {
         <>
             <div className='bg_biege_light pt-2 pb-2'>
                 <div className='container'>
-                    <h5 className='col-12 col-lg-8 text-white m-0'>Showing results for "{searchParams.get('search')}"</h5>
+                    <h5 className='col-12 col-lg-8 text-white m-0 fw600'>Showing results for "{searchParams.get('search')}"</h5>
                 </div>
             </div>
             <div className='container mt-4 mb-3'>

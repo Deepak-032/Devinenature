@@ -14,7 +14,7 @@ function ProductCategory({ bgColor, lineColor, direction, name, img, description
                         <div>
                             <h2 className='fw-bold'>{name}</h2>
                             <div className='h_line' style={{ borderTop: `2px solid ${lineColor}`, width: '221px' }}></div>
-                            <p className='font20 mt-5 mb-5'>{description}</p>
+                            <p className='font20 mt-4 mb-4'>{description}</p>
                             <Link to={link} className='view_more position-relative font20 dec_none text-white'>View More</Link>
                         </div>
                     </div>

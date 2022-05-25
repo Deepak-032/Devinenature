@@ -62,21 +62,24 @@ function Products({ products }) {
             <div className='container'>
                 <div className='row'>
                     <div className='col-12 col-lg-3 mt-3 filters_container'>
-                        <h5 className='text_biege border_bottom_biege pb-3' onClick={() => setShowFilters(!showFilters)}>
-                            {window.innerWidth > 991 ? "Filter By" : <span className='font14 fw-bold'>Filter Products according to your need &gt;</span>}
-                        </h5>
+                        {window.innerWidth > 991 ?
+                            <h5 className='text_biege fw600 border_bottom_biege pb-3'>Filter By</h5> :
+                            <div className='text_biege text-center font14 fw-bold' onClick={() => setShowFilters(!showFilters)}>
+                                Filter Products according to your need &gt;
+                            </div>
+                        }
                         <div className={`filters ${showFilters ? 'show_filters' : ''}`}>
                             <div className='d-lg-none text-center mb-3 text_biege' onClick={() => setShowFilters(!showFilters)}>
                                 Close
                             </div>
-                            <Dropdown heading={'Category'}>
+                            <Dropdown containerClassName='border_bottom_biege mt-2' heading={'Category'}>
                                 <div>Category 1</div>
                                 <div>Category 2</div>
                                 <div>Category 3</div>
                                 <div>Category 4</div>
                                 <div>Category 5</div>
                             </Dropdown>
-                            <Dropdown heading={'Price'}>
+                            <Dropdown containerClassName='border_bottom_biege mt-2' heading={'Price'}>
                                 <Box pl={0.7} pr={0.7} mt={3.7}>
                                     <PrettoSlider
                                         value={price}
@@ -90,10 +93,10 @@ function Products({ products }) {
                                     />
                                 </Box>
                                 <p>
-                                    <span className='price_symbol'>₹</span>{price[0]} - <span className='price_symbol'>₹</span>{price[1]}
+                                    <span className='price_symbol'>{price[0]}</span> - <span className='price_symbol'>{price[1]}</span>
                                 </p>
                             </Dropdown>
-                            <Dropdown heading={'Ratings'}>
+                            <Dropdown containerClassName='border_bottom_biege mt-2' heading={'Ratings'}>
                                 <Box pl={0.7} pr={0.7} mt={3.7}>
                                     <PrettoSlider
                                         valueLabelDisplay="auto"

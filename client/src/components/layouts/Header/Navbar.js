@@ -5,7 +5,7 @@ import { FiShoppingBag } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate, Outlet } from 'react-router-dom';
 import ContactUs from '../../Home/ContactUs';
 
 function Navbar() {
@@ -114,14 +114,14 @@ function Navbar() {
                                 onChange={e => setSearch(e.target.value)}
                                 placeholder='Search your favourites...'
                             />
-                            {searchResults &&
+                            {searchResults && showSearchInput &&
                                 <output className='search_suggestions'>
                                     {searchResults.slice(0, 8).map(r => <Link to={`/${r}`}>{r}</Link>)}
                                 </output>
                             }
                         </form>
-                        <FiShoppingBag className={showSearchInput ? 'hide_icon_mobile' : ''} />
-                        <FaRegUser className={showSearchInput ? 'hide_icon_mobile' : ''} />
+                        <Link to={'/cart'}><FiShoppingBag className={showSearchInput ? 'hide_icon_mobile' : ''} /></Link>
+                        <Link to={'/user'}><FaRegUser className={showSearchInput ? 'hide_icon_mobile' : ''} /></Link>
                         <Link to={'/product'} className='font14 dec_none d-none d-lg-block'>ABOUT</Link>
                         <button onClick={toogleContactForm} className='font14 dec_none d-none d-lg-block'>CONTACT</button>
                     </div>
@@ -148,6 +148,7 @@ function Navbar() {
                     <ContactUs reference={contactRef} />
                 </div>
             }
+            <Outlet />
         </>
     )
 }

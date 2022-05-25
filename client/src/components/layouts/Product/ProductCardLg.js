@@ -56,7 +56,7 @@ function ProductCardLg({ name, img, category, description, link, priceSpec, rati
                         offerPrice ?
                             <div className='product_card_price_spec'>
                                 <span className='offer_price'>{offerPrice}</span>
-                                <del className='mrp'>₹{mrp}</del>
+                                <del className='mrp'>{mrp}</del>
                                 <span className='discount'>{discount}% off</span>
                             </div> :
                             <div className='product_card_price_spec'>
