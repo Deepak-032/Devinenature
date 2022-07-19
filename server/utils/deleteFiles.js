@@ -1,12 +1,11 @@
-const path = require('path')
 const fs = require('fs')
+const path = require('path')
+
 __dirname = path.resolve()
 
 const deleteFiles = (images) => {
-    const uploadedPath = path.join(__dirname, 'client/public/assets/uploads/')
-
-    images.forEach(image => {
-        fs.unlink(path.join(uploadedPath, image), error => {
+    images.forEach(async image => {
+        await fs.unlink(path.join(__dirname, process.env.DELETE_PATH, image), error => {
             error && console.error(error)
         })
     })

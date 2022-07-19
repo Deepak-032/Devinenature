@@ -30,12 +30,14 @@ const productSchema = new mongoose.Schema({
             },
             offerPrice: {
                 type: Number,
+                required: [true, "Please enter offer Price, enter 0 if there is no discount"],
                 default: 0,
             },
             stock: {
                 type: Number,
                 required: [true, "Please enter product Stock"],
                 max: [9999, "Stock cannot exceed 4 characters"],
+                min: [0, "Stock cannot be negative"],
                 default: 1,
             },
         }],
@@ -43,7 +45,7 @@ const productSchema = new mongoose.Schema({
     },
     images: {
         type: [String],
-        validate: [v => Array.isArray(v) && v.length > 0, "Please choose atleast one image"]
+        validate: [v => Array.isArray(v) && v.length > 0, "Please add atleast one image"]
     },
     category: {
         type: String,
@@ -70,16 +72,15 @@ const productSchema = new mongoose.Schema({
         },
         rating: {
             type: Number,
-            required: true,
+            min: [1, "Please add overall ratings"],
+            required: [true, "Please add overall ratings"],
         },
         comment: {
             type: String,
-            required: true,
+            required: [true, "Please add a short message"],
             maxLength: 50,
         },
-        description: {
-            type: String
-        },
+        description: String,
         createdAt: {
             type: Date,
             default: Date.now,

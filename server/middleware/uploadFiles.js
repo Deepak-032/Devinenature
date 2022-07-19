@@ -4,11 +4,17 @@ const path = require('path')
 
 __dirname = path.resolve()
 const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
-const uploadPath = path.join(__dirname, 'client/public/assets/uploads/')
 
 exports.uploadFiles = catchAsyncErrors(async (req, res, next) => {
     if (req.files == null) {
-        return next(new ErrorHandler("Please choose images to upload", 400))
+        let oldImages = req.body.oldImages
+        if (oldImages) {
+            if (!Array.isArray(oldImages)) {
+                oldImages = [oldImages]
+            }
+            req.body.images = oldImages
+        }
+        return next()
     }
 
     let images = req.files.images,
@@ -25,7 +31,7 @@ exports.uploadFiles = catchAsyncErrors(async (req, res, next) => {
             mimeTypeMissing = true
         }
         image.name = Date.now() + "." + image.name
-        uploadedImages.push(image.name)
+        uploadedImages.push(`/assets/uploads/${image.name}`)
         return image
     })
 
@@ -34,11 +40,21 @@ exports.uploadFiles = catchAsyncErrors(async (req, res, next) => {
     }
 
     const promises = images.map(image => {
-        const savePath = uploadPath + image.name
+        const savePath = path.join(__dirname, process.env.UPLOAD_PATH) + image.name
         return image.mv(savePath)
     })
 
     await Promise.all(promises)
-    req.body.images = uploadedImages
+
+    if (req.body.oldImages) {
+        let oldImages = req.body.oldImages
+        if (!Array.isArray(oldImages)) {
+            oldImages = [oldImages]
+        }
+        req.body.images = [...oldImages, ...uploadedImages]
+    } else {
+        req.body.images = uploadedImages
+    }
+
     next()
 })

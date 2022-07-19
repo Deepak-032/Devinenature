@@ -6,31 +6,36 @@ const deleteFiles = require('../utils/deleteFiles')
 
 // Get all products
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
-    const resultPerPage = 5
-    const productsCount = await Product.countDocuments()
+    const resultPerPage = Number(req.query.resultPerPage) || 12
     const apiFeatures = new ApiFeatures(Product.find({}, {
         name: 1,
-        priceSpec: { $first: '$priceSpecs' },
+        // priceSpec: { $first: '$priceSpecs' },
+        priceSpecs: 1,
         image: { $first: '$images' },
         ratings: 1,
         category: 1,
-        description: 1
+        description: 1,
+        bestSelling: 1
     }), req.query)
         .search()
         .filter()
         .pagination(resultPerPage)
     const products = await apiFeatures.query.lean()
 
+    const countDocs = new ApiFeatures(Product.find(), req.query).search().filter()
+    const productsCount = await countDocs.query.countDocuments()
+
     res.status(200).json({
         success: true,
         products,
         productsCount,
-        filteredProductsCount: products.length
+        resultPerPage,
     })
 })
 
 // Create new product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+    req.body = { images: req.body.images, ...JSON.parse(req.body.product) }
     req.body.user = req.user.id
 
     try {
@@ -41,13 +46,21 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
             product
         })
     } catch (error) {
-        deleteFiles(req.body.images)
-        return next(new ErrorHandler(error.message, 400))
+        if (req.body.images?.length)
+            await deleteFiles(req.body.images)
+        next(error)
     }
 })
 
 // Update product -- Admin
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
+    if(!req.body.images) {
+        return next(new ErrorHandler("Please add atleast one image", 404))
+    }
+
+    req.body = { images: req.body.images, ...JSON.parse(req.body.product) }
+    req.body.user = req.user.id
+
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,                      // returns the newly updated object
         runValidators: true,
@@ -56,6 +69,10 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))
+    }
+
+    if(req.body.deleteImages?.length) {
+        await deleteFiles(req.body.deleteImages)
     }
 
     res.status(200).json({
@@ -72,7 +89,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Product not found", 404))
     }
 
-    deleteFiles(product.images)
+    await deleteFiles(product.images)
     await product.remove()
 
     res.status(200).json({
@@ -83,11 +100,13 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Get product details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
-    const product = await Product.findById(req.params.id).lean()
+    let product = await Product.findById(req.params.id).lean()
 
     if (!product) {
         return next(new ErrorHandler("Product not found", 404))
     }
+
+    product.reviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).splice(6)
 
     res.status(200).json({
         success: true,
@@ -97,7 +116,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
 
 // Create New Review or Update previous Review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
-    const { rating, comment, description, productId } = req.body
+    const { rating, comment, description } = req.body
 
     const review = {
         user: req.user.id,
@@ -107,7 +126,12 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
         description,
     }
 
-    const product = await Product.findById(productId)
+    const product = await Product.findById(req.params.id)
+
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404))
+    }
+
     const isReviewed = product.reviews.find(rev => {
         if (rev.user.toString() === req.user.id.toString()) {
             rev.rating = Number(rating)
@@ -123,7 +147,29 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     }
 
     product.ratings = product.reviews.reduce((ratings, rev) => ratings + rev.rating, 0) / product.reviews.length
-    await product.save({ validateBeforeSave: false })
+    await product.save()
+
+    res.status(200).json({
+        success: true,
+        message: "Your review added successfully"
+    })
+})
+
+// Get all Reviews of a product
+exports.getAllReviews = catchAsyncErrors(async (req, res, next) => {
+    let product = await Product.findById(req.params.id, {
+        name: 1,
+        ratings: 1,
+        numOfReviews: 1,
+        images: 1,
+        reviews: 1,
+    }).lean()
+
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404))
+    }
+
+    product.reviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
     res.status(200).json({
         success: true,
@@ -131,9 +177,26 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-// Get all Reviews of a product
-exports.getAllReviews = catchAsyncErrors(async (req, res, next) => {
+// Get all Reviews -- Admin
+exports.getReviews = catchAsyncErrors(async (req, res, next) => {
+    const search = req.query.search ? {
+        "review.name": {
+            "$regex": req.query.search,
+            "$options": "i"
+        }
+    } : {}
 
+    const products = await Product.aggregate([
+        { "$project": { name: 1, review: "$reviews" } },
+        { "$unwind": { "path": "$review" } },
+        { "$match": search },
+        { "$sort": { "review.createdAt": -1 } }
+    ])
+
+    res.status(200).json({
+        success: true,
+        products
+    })
 })
 
 // Delete Review -- Admin
