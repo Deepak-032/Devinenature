@@ -4,45 +4,72 @@ const formatUserWishlist = require("../../utils/user/formatUserWishlist")
 
 // Get User Wishlist
 exports.getUserWishlist = catchAsyncErrors(async (req, res, next) => {
-    let user = await User.findById(req.user.id, { _id: 0, wishlist: 1 }).populate(
+    let user = await User.findById(req.user.id, { wishlist: 1 }).populate(
         "wishlist.product",
-        "name priceSpecs images"
-    ).lean()
+        "name priceSpecs images ratings"
+    )
 
-    user.wishlist = formatUserWishlist(user.wishlist)
+    let isProductDeleted = false
+    let filtered = user.wishlist.filter(item => {
+        if (item.product === null)
+            isProductDeleted = true
+        return item.product
+    })
+
+    if (isProductDeleted) {
+        user.wishlist = filtered
+        await user.save()
+    }
+
+    const wishlist = formatUserWishlist(user.wishlist)
 
     res.status(200).json({
         success: true,
-        wishlist: user.wishlist,
+        wishlist,
     })
 })
 
 // Add Product to Wishlist
 exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
-    let user = await User.findById(req.user.id)
-    const exists = user.wishlist.find(item => item.product.toString() === req.body.product.toString())
+    let user = await User.findById(req.user.id, { wishlist: 1 }).populate(
+        "wishlist.product",
+        "name priceSpecs images ratings"
+    )
+
+    const exists = user.wishlist.find(item => item.product._id.toString() === req.body.product.toString())
 
     if (!exists) {
         user.wishlist.push(req.body)    // product
+        
+        await user.save()
+        user = await user.populate(
+            "wishlist.product",
+            "name priceSpecs images ratings"
+        )
     }
-    await user.save()
+
+    const wishlist = formatUserWishlist(user.wishlist)
 
     res.status(200).json({
         success: true,
-        wishlist: user.wishlist,
+        wishlist,
     })
 })
 
 // Remove Product from Wishlist
 exports.removeFromWishlist = catchAsyncErrors(async (req, res, next) => {
-    let user = await User.findById(req.user.id)
+    let user = await User.findById(req.user.id, { wishlist: 1 }).populate(
+        "wishlist.product",
+        "name priceSpecs images ratings"
+    )
 
-    user.wishlist = user.wishlist.filter(item => item.product.toString() !== req.query.id.toString())
-    await user.save({ validateBeforeSave: false })
+    user.wishlist = user.wishlist.filter(item => item.product._id.toString() !== req.query.product.toString())
+    await user.save()
 
+    const wishlist = formatUserWishlist(user.wishlist)
+    
     res.status(200).json({
         success: true,
-        message: "Product successfully removed",
-        wishlist: user.wishlist,
+        wishlist,
     })
 })

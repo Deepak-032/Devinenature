@@ -20,14 +20,15 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     const token = jwt.sign({ name, email, password, phone }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE_EMAIL_VERIFICATION
     })
-    const emailVerificationUrl = `${req.protocol}://${req.get('host')}/api/dk1/register/verify/${token}`
+    // const emailVerificationUrl = `${req.protocol}://${req.get('host')}/register/${token}`
+    const emailVerificationUrl = `${req.protocol}://localhost:3000/register/${token}`
     const message = `Click on the link given below to verify your email address:\n\n${emailVerificationUrl}\n\nIf you have not requested this email then, please ignore it.`
-
-    await sendEmail({
-        email,
-        subject: `User Email Verification`,
-        message,
-    })
+    console.log(emailVerificationUrl)
+    // await sendEmail({
+    //     email,
+    //     subject: `User Email Verification`,
+    //     message,
+    // })
 
     res.status(200).json({
         success: true,
@@ -37,7 +38,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
 // Register Verified User
 exports.registerVerifiedUser = catchAsyncErrors(async (req, res, next) => {
-    const decodedData = await jwt.verify(req.params.token, process.env.JWT_SECRET)
+    const decodedData = jwt.verify(req.params.token, process.env.JWT_SECRET)
     const user = await User.create(decodedData)
 
     sendToken(user, 201, res)
@@ -51,7 +52,13 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Please enter Email & Password", 400))
     }
 
-    const user = await User.findOne({ email }, { name: 1, password: 1 })
+    const user = await User.findOne({ email }, {
+        name: 1,
+        email: 1,
+        phone: 1,
+        password: 1,
+        role: 1
+    })
 
     if (!user) {
         return next(new ErrorHandler("Email or Password is incorrect"))
@@ -91,16 +98,17 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken()
     await user.save({ validateBeforeSave: false })
 
-    const resetPasswordUrl = `${req.protocol}://${req.get('host')}/api/dk1/password/reset/${resetToken}`
+    // const resetPasswordUrl = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}`
+    const resetPasswordUrl = `${req.protocol}://localhost:3000/resetpassword/${resetToken}`
     const message = `Your reset password token is: \n\n${resetPasswordUrl}\n\nIf you have not requested this email then, please ignore it.`
 
     try {
-        await sendEmail({
-            email: user.email,
-            subject: `${process.env.COMPANY_NAME} User Password Recovery`,
-            message,
-        })
-
+        // await sendEmail({
+        //     email: user.email,
+        //     subject: `${process.env.COMPANY_NAME} User Password Recovery`,
+        //     message,
+        // })
+        console.log(resetPasswordUrl)
         res.status(200).json({
             success: true,
             message: `Link sent to ${user.email}, click on link to reset your password`,

@@ -9,14 +9,14 @@ process.on('uncaughtException', err => {
 })
 
 // config
-// if (process.env.NODE_ENV !== 'production')
-    require('dotenv').config({ path: 'server/config/config.env' })
+require('dotenv').config({ path: 'server/config/.env' })
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 
 // connecting to database
 connectDatabase()
 
 const server = app.listen(process.env.PORT, () => {
-    console.log(`Server started on ${process.env.PORT}`)
+    console.log(`Server started on ${process.env.PORT} in ${process.env.NODE_ENV} mode`)
 })
 
 // Unhandled Promise rejection

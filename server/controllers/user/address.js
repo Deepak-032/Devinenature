@@ -20,17 +20,19 @@ exports.addNewAddress = catchAsyncErrors(async (req, res, next) => {
 
     res.status(201).json({
         success: true,
+        message: "Address added successfully",
         addresses: user.addresses
     })
 })
 
 // Update User Address
 exports.updateUserAddress = catchAsyncErrors(async (req, res, next) => {
-    const { houseNo, pincode, street, landmark, city, state, country, phoneNo } = req.body
+    const { name, houseNo, pincode, street, landmark, city, state, country, phoneNo, _id } = req.body
     let user = await User.findById(req.user.id, { addresses: 1 })
 
     user.addresses.find(address => {
-        if (address._id.toString() === req.query.address.toString()) {
+        if (address._id.toString() === _id.toString()) {
+            address.name = name
             address.houseNo = houseNo
             address.pincode = pincode
             address.street = street
@@ -46,6 +48,7 @@ exports.updateUserAddress = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
+        message: "Address updated successfully",
         addresses: user.addresses
     })
 })
@@ -55,11 +58,11 @@ exports.deleteUserAddress = catchAsyncErrors(async (req, res, next) => {
     let user = await User.findById(req.user.id, { addresses: 1 })
 
     user.addresses = user.addresses.filter(address => address._id.toString() !== req.query.address.toString())
-    await user.save()
+    await user.save({ validateBeforeSave: false })
 
     res.status(200).json({
         success: true,
-        message: "Address Deleted Successfully",
+        message: "Address deleted successfully",
         addresses: user.addresses
     })
 })

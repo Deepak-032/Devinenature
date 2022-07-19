@@ -1,5 +1,6 @@
 const catchAsyncErrors = require("../../middleware/catchAsyncErrors")
 const User = require('../../models/user')
+const ApiFeatures = require("../../utils/apiFeatures")
 const ErrorHandler = require('../../utils/errorHandler')
 
 // Get User Details
@@ -8,7 +9,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
         name: 1,
         email: 1,
         phone: 1,
-        createdAt: 1,
+        role: 1
     }).lean()
 
     res.status(200).json({
@@ -21,7 +22,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
-        email: req.body.email,
+        // email: req.body.email,
         phone: req.body.phone
     }
 
@@ -33,24 +34,39 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        user,
+        message: "Your profile updated successfully.",
     })
 })
 
 // Get All Users -- Admin
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
-    const users = await User.find({}, { name: 1, email: 1, role: 1, createdAt: 1 }).lean()
+    const resultPerPage = req.query.resultPerPage || 12
+
+    const apiFeatures = new ApiFeatures(User.find({}, {
+        name: 1,
+        email: 1,
+        role: 1,
+        phone: 1,
+        createdAt: 1
+    }), req.query)
+        .search()
+        .pagination(resultPerPage)
+
+    const users = await apiFeatures.query.lean()
+
+    const countDocs = new ApiFeatures(User.find(), req.query).search().filter()
+    const usersCount = await countDocs.query.countDocuments()
 
     res.status(200).json({
         success: true,
         users,
-        usersCount: users.length
+        usersCount
     })
 })
 
 // Get User Details -- Admin
 exports.getUserDetailsAdmin = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.params.id, { 
+    const user = await User.findById(req.params.id, {
         name: 1,
         email: 1,
         phone: 1,
