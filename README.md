@@ -1,10 +1,20 @@
-# Devinenature
-Devinenature MERN Stack Project
+# Devinenature: MERN Stack Project
 
-This is the sample of the code of my project I have been working upon.
-It can help you to learn and setup a MERN stack project, it also gives you the idea of MVC structure while working with Node and React which acts as a view.
-For the gobal statement management I have used the redux in actual project but I have not pushed that code here on github, for the frontend I have loaded it with some constant data inside every component just to create the view.
-The project is still under development, I will provide the link of the website after it get hosted.
+Welcome to the Devinenature MERN Stack Project!
+
+This project serves as a comprehensive example to help you learn and set up a MERN stack application. It also provides insights into implementing the MVC (Model-View-Controller) structure using Node.js and React.
+
+Devinenature is a full-fledged, custom e-commerce website developed using the MVC architecture with Node.js for the backend and Express as the server framework. The backend leverages Mongoose for database management, while the frontend is built with React. For global state management, Redux is utilized. The application is hosted on Azure Web App.
+
+Key Features:
+- Full e-commerce functionality
+- MVC architecture for organized code structure
+- Node.js and Express for backend
+- Mongoose for database interactions
+- React for frontend development
+- Redux for state management
+
+[Click here](https://devinenature.azurewebsites.net/) to view the project.
 
 ### For any query or collaboration you can reach out to me at dkart032@gmail.com 
 
