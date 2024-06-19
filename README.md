@@ -16,6 +16,8 @@ Key Features:
 
 [Click here](https://devinenature.azurewebsites.net/) to view the project.
 
+Please note that due to financial constraints of the client, the project was halted midway. However, it has been hosted as a portfolio piece.
+
 ### For any query or collaboration you can reach out to me at dkart032@gmail.com 
 
 ### This project is developed using node version 16.15.1
